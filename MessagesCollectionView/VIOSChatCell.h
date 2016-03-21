@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  VIOSChatCell.h
 //  MessagesCollectionView
 //
 //  Created by Aziz Latypov on 17/03/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
-
+@interface VIOSChatCell : UICollectionViewCell
+- (void)setText:(NSString*)text;
 @end
-
