@@ -35,6 +35,14 @@
     _items = [NSMutableArray new];
 }
 
+//- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity{
+//    CGPoint p = [self.collectionView contentOffset];
+//    if (fabs(p.x - proposedContentOffset.x) > 0.00001) {
+//        proposedContentOffset.x = p.x;
+//    }
+//    return proposedContentOffset;
+//}
+
 - (void)setDelegate:(id<VIOSMessagesCollectionViewLayoutDelegate>)delegate {
     _delegate = delegate;
     [self layoutItems];
@@ -49,20 +57,21 @@
     NSMutableArray *sections = [NSMutableArray new];
     for(NSInteger i=0; i<4; i++) {
         NSArray *its = @[
-                         [[LayoutSourceItemStub alloc] initWithHeight:100],
-                         [[LayoutSourceItemStub alloc] initWithHeight:100],
-                         [[LayoutSourceItemStub alloc] initWithHeight:100],
+                         [[LayoutSourceItemStub alloc] initWithHeight:34],
+                         [[LayoutSourceItemStub alloc] initWithHeight:34],
+                         [[LayoutSourceItemStub alloc] initWithHeight:34],
                          ];
-        LayoutSourceItemStub *si = [[LayoutSourceItemStub alloc] initWithHeight:20 items:its];
+        LayoutSourceItemStub *si = [[LayoutSourceItemStub alloc] initWithHeight:12 items:its];
         [sections addObject:si];
     }
-    LayoutSourceItemStub *sourceItem = [[LayoutSourceItemStub alloc] initWithHeight:50 items:sections];
+    LayoutSourceItemStub *sourceItem = [[LayoutSourceItemStub alloc] initWithHeight:14 items:sections];
 
     VIOSChatLayoutMaker *sut = [VIOSChatLayoutMaker new];
-    
+    NSLog(@"calculate layout =>");
     self.resultingAttributesItem =
-    [sut layoutAttributesWithSourceItem:sourceItem fixedWidth:width];
-    
+    [sut layoutAttributesWithSourceItem:sourceItem fixedWidth:width minimalHeight:0]; //size.height
+    NSLog(@"calculate layout <=");
+
     self.contentSize = [self.resultingAttributesItem size];
 }
 
@@ -128,7 +137,7 @@
     attr.bounds = bounds;
     attr.center = center;
 
-    NSLog(@"indexPath (row: %ld, sec: %ld", [indexPath row], [indexPath section]);
+//    NSLog(@"indexPath (row: %ld, sec: %ld", [indexPath row], [indexPath section]);
     
     return attr;
 }

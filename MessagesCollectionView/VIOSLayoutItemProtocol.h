@@ -38,5 +38,5 @@
 @end
 
 @protocol VIOSLayoutMaker
-- (id<VIOSLayoutAttributesItem>)layoutAttributesWithSourceItem:(id<VIOSLayoutSourceItem>)layoutSourceItem fixedWidth:(CGFloat)fixedWidth;
+- (id<VIOSLayoutAttributesItem>)layoutAttributesWithSourceItem:(id<VIOSLayoutSourceItem>)layoutSourceItem fixedWidth:(CGFloat)fixedWidth minimalHeight:(CGFloat)minimalHeight;
 @end

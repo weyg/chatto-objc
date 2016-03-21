@@ -55,7 +55,7 @@ describe(@"sut", ^{
         
         // when
         id<VIOSLayoutAttributesItem> resultingAttributesItem =
-        [sut layoutAttributesWithSourceItem:sourceItem fixedWidth:containerWidth];
+        [sut layoutAttributesWithSourceItem:sourceItem fixedWidth:containerWidth minimalHeight:0];
         
         // then
         expect(resultingAttributesItem).equal(expectedAttributesItem);
@@ -115,7 +115,7 @@ describe(@"sut", ^{
         
         // when
         id<VIOSLayoutAttributesItem> resultingAttributesItem =
-        [sut layoutAttributesWithSourceItem:sourceItem fixedWidth:containerWidth];
+        [sut layoutAttributesWithSourceItem:sourceItem fixedWidth:containerWidth minimalHeight:0];
         NSLog(@"expected: \n%@\n===\n", [(VIOSLayoutAttributesItemObject*)expectedAttributesItem debugDescription]);
         NSLog(@"result: \n%@", [(VIOSLayoutAttributesItemObject*)resultingAttributesItem debugDescription]);
         

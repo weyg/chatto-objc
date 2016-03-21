@@ -11,12 +11,6 @@
 
 @implementation VIOSMessagesCollectionView
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    [(VIOSMessagesCollectionViewLayout*)self.collectionViewLayout setDelegate:self];
-}
-
 - (NSInteger)numberOfSections {
     return 4;
 }

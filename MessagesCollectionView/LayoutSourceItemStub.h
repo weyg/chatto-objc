@@ -12,14 +12,6 @@
 
 @interface LayoutSourceItemStub : NSObject <VIOSLayoutSourceItem>
 
-@property (nonatomic, assign) CGFloat height;
-
-@property (nonatomic, assign) CGFloat absoluteHeight;
-@property (nonatomic, assign) CGFloat cachedWidth;
-@property (nonatomic, assign) BOOL cachedHeight;
-
-@property (nonatomic, strong) NSArray <id<VIOSLayoutSourceItem>>* items;
-
 - (instancetype)initWithHeight:(CGFloat)height;
 - (instancetype)initWithHeight:(CGFloat)height items:(NSArray <id<VIOSLayoutSourceItem>>*)items;
 

@@ -8,6 +8,8 @@
 
 #import "VIOSMessagesCollectionViewController.h"
 
+#import "VIOSMessagesCollectionViewLayout.h"
+
 @implementation VIOSMessagesCollectionViewController
 
 - (void)beginUpdates {
@@ -20,6 +22,26 @@
 }
 
 - (void)updateMessageAtIndexPath:(NSIndexPath *)oldIndexPath newIndexPath:(NSIndexPath *)newIndexPath changeType:(VIOSChatChangeType)type {
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [(VIOSMessagesCollectionViewLayout*)self.collectionViewLayout setDelegate:self.collectionView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSLog(@"did appear");
+    
+    self.collectionView.alwaysBounceVertical = YES;
+    
+    [self.collectionView reloadData];
+    [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.contentSize.height)];
+    
+    NSLog(@"did scroll");
 }
 
 #pragma mark - DataSource -

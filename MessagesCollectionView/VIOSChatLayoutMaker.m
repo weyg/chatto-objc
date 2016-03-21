@@ -13,7 +13,7 @@
 
 @implementation VIOSChatLayoutMaker
 
-- (id<VIOSLayoutAttributesItem>)layoutAttributesWithSourceItem:(id<VIOSLayoutSourceItem>)layoutSourceItem fixedWidth:(CGFloat)fixedWidth
+- (id<VIOSLayoutAttributesItem>)layoutAttributesWithSourceItem:(id<VIOSLayoutSourceItem>)layoutSourceItem fixedWidth:(CGFloat)fixedWidth minimalHeight:(CGFloat)minimalHeight
 {
     // pre-conditions
     // ...
@@ -40,14 +40,14 @@
         // we start from the bottom of container
         CGFloat prevBottom, prevHeight;
         
-        prevBottom = absoluteHeight;
+        prevBottom = MAX(absoluteHeight, minimalHeight);
         prevHeight = 0;
         
         for (i=0; i<n; i++) {
 
             id<VIOSLayoutSourceItem> item = [layoutItems objectAtIndex:i];
             
-            id<VIOSLayoutAttributesItem> attr = [self layoutAttributesWithSourceItem:item fixedWidth:fixedWidth]; // recursive call
+            id<VIOSLayoutAttributesItem> attr = [self layoutAttributesWithSourceItem:item fixedWidth:fixedWidth minimalHeight:0]; // recursive call
 
             CGRect prevFrame = CGRectMake(0, prevBottom-prevHeight, fixedWidth, prevHeight);
             CGPoint prevCenter = CGPointMake(xmid, prevBottom - prevHeight/2);
@@ -71,7 +71,7 @@
         assert(attributes.count == n);
         
         result = [VIOSLayoutAttributesItemObject new];
-        result.size = CGSizeMake(fixedWidth, absoluteHeight);
+        result.size = CGSizeMake(fixedWidth, MAX(absoluteHeight, minimalHeight));
         result.center = CGPointZero; // actually, should not be ever used
         result.items = attributes;
     }

@@ -8,6 +8,18 @@
 
 #import "LayoutSourceItemStub.h"
 
+@interface LayoutSourceItemStub ()
+
+@property (nonatomic, assign) CGFloat height;
+
+@property (nonatomic, assign) CGFloat absoluteHeight;
+@property (nonatomic, assign) CGFloat cachedWidth;
+@property (nonatomic, assign) BOOL cachedHeight;
+
+@property (nonatomic, strong) NSArray <id<VIOSLayoutSourceItem>>* items;
+
+@end
+
 @implementation LayoutSourceItemStub
 
 - (CGFloat)heightWithFixedWidth:(CGFloat)fixedWidth {
@@ -15,7 +27,7 @@
 }
 
 - (CGFloat)absoluteHeightWithFixedWidth:(CGFloat)fixedWidth {
-    if (!_cachedHeight || fabs(_absoluteHeight)<0.001 || fabs(_cachedWidth-fixedWidth) > 1) {
+    if (!_cachedHeight || fabs(_absoluteHeight)<0.001 || fabs(_cachedWidth - fixedWidth) > 1) {
         CGFloat h = _height;
         for (NSInteger i = 0; i< self.items.count; i++) {
             id<VIOSLayoutSourceItem> it = [self.items objectAtIndex:i];
@@ -27,6 +39,8 @@
     }
     return _absoluteHeight;
 }
+
+#pragma mark - Init -
 
 - (instancetype)initWithHeight:(CGFloat)height
 {

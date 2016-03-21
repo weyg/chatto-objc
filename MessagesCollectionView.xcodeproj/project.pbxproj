@@ -24,6 +24,7 @@
 		3E24836A1C9C155C00C167EA /* VIOSLayoutMakerSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2483691C9C155C00C167EA /* VIOSLayoutMakerSpecs.m */; };
 		3E24836E1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E24836D1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m */; };
 		3E5C60351CA00B200016B16B /* LayoutSourceItemStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5C60341CA00B200016B16B /* LayoutSourceItemStub.m */; };
+		3E5C60381CA0457F0016B16B /* VIOSMessagesCollectionViewController+Scrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5C60371CA0457F0016B16B /* VIOSMessagesCollectionViewController+Scrolling.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		3E24836D1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIOSLayoutAttributesItemObject.m; sourceTree = "<group>"; };
 		3E5C60331CA00B200016B16B /* LayoutSourceItemStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutSourceItemStub.h; sourceTree = "<group>"; };
 		3E5C60341CA00B200016B16B /* LayoutSourceItemStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutSourceItemStub.m; sourceTree = "<group>"; };
+		3E5C60361CA0457F0016B16B /* VIOSMessagesCollectionViewController+Scrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VIOSMessagesCollectionViewController+Scrolling.h"; sourceTree = "<group>"; };
+		3E5C60371CA0457F0016B16B /* VIOSMessagesCollectionViewController+Scrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VIOSMessagesCollectionViewController+Scrolling.m"; sourceTree = "<group>"; };
 		B8743E43CE2E842D10D30576 /* Pods-MessagesCollectionViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesCollectionViewTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesCollectionViewTests/Pods-MessagesCollectionViewTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,6 +137,8 @@
 				3E2483241C9ACF0500C167EA /* Main.storyboard */,
 				3E2483401C9ACF2F00C167EA /* VIOSMessagesCollectionViewController.h */,
 				3E2483411C9ACF2F00C167EA /* VIOSMessagesCollectionViewController.m */,
+				3E5C60361CA0457F0016B16B /* VIOSMessagesCollectionViewController+Scrolling.h */,
+				3E5C60371CA0457F0016B16B /* VIOSMessagesCollectionViewController+Scrolling.m */,
 				3E2483461C9ACF6A00C167EA /* VIOSMessagesCollectionView.h */,
 				3E2483471C9ACF6A00C167EA /* VIOSMessagesCollectionView.m */,
 				3E2483421C9ACF2F00C167EA /* VIOSMessagesCollectionViewLayout.h */,
@@ -385,6 +390,7 @@
 				3E24834E1C9ACFAB00C167EA /* VIOSChatPresenter.m in Sources */,
 				3E24836E1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m in Sources */,
 				3E5C60351CA00B200016B16B /* LayoutSourceItemStub.m in Sources */,
+				3E5C60381CA0457F0016B16B /* VIOSMessagesCollectionViewController+Scrolling.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
