@@ -13,90 +13,68 @@
 
 @implementation VIOSChatLayoutMaker
 
-- (id<VIOSLayoutAttributesItem>)layoutAttributesWithSourceItem:(id<VIOSLayoutSourceItem>)layoutSourceItem
-                                                containerFrame:(CGRect)containerFrame
+- (id<VIOSLayoutAttributesItem>)layoutAttributesWithSourceItem:(id<VIOSLayoutSourceItem>)layoutSourceItem fixedWidth:(CGFloat)fixedWidth
 {
     // pre-conditions
     // ...
     
-    NSArray *layoutItems = layoutSourceItem.items;
-    NSMutableArray *attributes = [NSMutableArray new];
-    NSInteger i,n;
+    VIOSLayoutAttributesItemObject *result = nil;
     
-    CGRect bounds = containerFrame;
-    CGFloat height = bounds.size.height;
-    CGFloat width = bounds.size.width;
-    
-    CGPoint currentCenter, prevCenter;
-    CGRect currentFrame, prevFrame;
-    CGFloat totalHeight = [layoutSourceItem heightWithFixedWith:width];
+    if ([[layoutSourceItem items] count] == 0) { // is a leaf
+        
+        CGFloat h = [layoutSourceItem absoluteHeightWithFixedWidth:fixedWidth];
+        result = [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointZero size:CGSizeMake(fixedWidth, h)];
+        
+    } else { // subtree -> needs recursive call
+        
+        NSInteger i,n;
+        CGFloat absoluteHeight = [layoutSourceItem absoluteHeightWithFixedWidth:fixedWidth];
+        NSArray *layoutItems = layoutSourceItem.items;
 
-    CGFloat xmid = [self horizontalCenterForItem:nil containerWidth:width withPrevItemBounds:CGRectZero prevItemCenter:CGPointZero];
-    
-    // we start from the bottom of container
-    prevCenter = CGPointMake(xmid, height);
-    prevFrame = CGRectZero;
-    
-    n = layoutItems.count;
+        n = layoutItems.count;
+        
+        NSMutableArray *attributes = [NSMutableArray new];
+        
+        CGFloat xmid = [self horizontalCenterForItem:nil containerWidth:fixedWidth withPrevItemBounds:CGRectZero prevItemCenter:CGPointZero];
+        
+        // we start from the bottom of container
+        CGFloat prevBottom, prevHeight;
+        
+        prevBottom = absoluteHeight;
+        prevHeight = 0;
+        
+        for (i=0; i<n; i++) {
 
-    for (i=0; i<n; i++) {
-        id<VIOSLayoutSourceItem> item = [layoutItems objectAtIndex:i];
-        
-        CGSize currentSize = [self sizeForItem:item containerWidth:width withPrevItemBounds:prevFrame prevItemCenter:prevCenter];
-        currentFrame = CGRectZero;
-        currentFrame.size = currentSize;
-        
-        currentCenter =
-        CGPointMake(
-                    [self horizontalCenterForItem:item containerWidth:width withPrevItemBounds:prevFrame prevItemCenter:prevCenter],
-                    [self verticalCenterForItem:item containerWidth:width withPrevItemBounds:prevFrame prevItemCenter:prevCenter]
-                    );
-        
-        id<VIOSLayoutAttributesItem> attr;
-        
-        if ([[item items] count] > 0) { // sub-tree
+            id<VIOSLayoutSourceItem> item = [layoutItems objectAtIndex:i];
             
-            CGFloat itemsHeight = 0, j;
-            NSInteger itemsCount = [[item items] count];
-            for (j=0; j<itemsCount; j++) {
-                id<VIOSLayoutSourceItem> it = [[item items] objectAtIndex:j];
-                itemsHeight += [it heightWithFixedWith:width];
-            }
+            id<VIOSLayoutAttributesItem> attr = [self layoutAttributesWithSourceItem:item fixedWidth:fixedWidth]; // recursive call
+
+            CGRect prevFrame = CGRectMake(0, prevBottom-prevHeight, fixedWidth, prevHeight);
+            CGPoint prevCenter = CGPointMake(xmid, prevBottom - prevHeight/2);
             
-            currentFrame.size.height += itemsHeight;
-            currentCenter.y -= itemsHeight/2;
+            CGPoint currentCenter =
+            CGPointMake(
+                        [self horizontalCenterForItem:item containerWidth:fixedWidth withPrevItemBounds:prevFrame prevItemCenter:prevCenter],
+                        [self verticalCenterForItem:item containerWidth:fixedWidth withPrevItemBounds:prevFrame prevItemCenter:prevCenter]
+                        );
             
-            CGRect attrRect = CGRectZero;
-            attrRect.size = currentFrame.size;
-            attrRect.origin = currentCenter;
-            
-            attr = [self layoutAttributesWithSourceItem:item containerFrame:attrRect];  // recursive call
-            
-            // force new rect
+            // set center within parent's bounds
             [attr setCenter:currentCenter];
-            [attr setSize:attrRect.size];
             
-        } else { // leaf
+            [attributes addObject:attr];
             
-            attr = [[VIOSLayoutAttributesItemObject alloc] initWithCenter:currentCenter size:currentFrame.size];
-            
+            prevHeight = attr.size.height;
+            prevBottom = attr.center.y + prevHeight/2;
         }
         
-        [attributes addObject:attr];
+        // post-conditions
+        assert(attributes.count == n);
         
-        totalHeight += attr.size.height;
-        
-        prevFrame = currentFrame;
-        prevCenter = currentCenter;
+        result = [VIOSLayoutAttributesItemObject new];
+        result.size = CGSizeMake(fixedWidth, absoluteHeight);
+        result.center = CGPointZero; // actually, should not be ever used
+        result.items = attributes;
     }
-    
-    // post-conditions
-    assert(attributes.count == n);
-    
-    VIOSLayoutAttributesItemObject *result = [VIOSLayoutAttributesItemObject new];
-    result.size = CGSizeMake(width, totalHeight);
-    result.center = CGPointMake(xmid, containerFrame.origin.y + height - totalHeight/2); // at the bottom of containerFrame
-    result.items = attributes;
     
     return result;
 }
@@ -108,17 +86,11 @@
 }
 
 - (CGFloat)verticalCenterForItem:(id<VIOSLayoutSourceItem>)item containerWidth:(double)width withPrevItemBounds:(CGRect)prevItemBounds prevItemCenter:(CGPoint)prevItemCenter {    
-    CGFloat h = [item heightWithFixedWith:width];
+    CGFloat h = [item absoluteHeightWithFixedWidth:width];
     
     CGFloat prevTop = ceil(prevItemCenter.y - prevItemBounds.size.height/2);
     
     return ceil(prevTop - h/2);
-}
-
-- (CGSize)sizeForItem:(id<VIOSLayoutSourceItem>)item containerWidth:(double)width withPrevItemBounds:(CGRect)prevItemBounds prevItemCenter:(CGPoint)prevItemCenter {
-    CGFloat h = [item heightWithFixedWith:width];
-    CGFloat w = width;
-    return CGSizeMake(w, h);
 }
 
 @end

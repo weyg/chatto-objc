@@ -10,8 +10,19 @@
 
 @protocol VIOSLayoutSourceItem
 
-- (CGFloat)heightWithFixedWith:(CGFloat)fixedWidth;
+/**
+ Should return self height.
+ */
+- (CGFloat)heightWithFixedWidth:(CGFloat)fixedWidth;
 
+/**
+ Should return absolute item height (e.g. self height + heights of all child items recursively).
+ */
+- (CGFloat)absoluteHeightWithFixedWidth:(CGFloat)fixedWidth;
+
+/**
+ An array of child items.
+ */
 @property (nonatomic, readonly) NSArray <id<VIOSLayoutSourceItem>>* items;
 
 @end
@@ -27,6 +38,5 @@
 @end
 
 @protocol VIOSLayoutMaker
-- (id<VIOSLayoutAttributesItem>)layoutAttributesWithSourceItem:(id<VIOSLayoutSourceItem>)layoutSourceItem
-                                                containerFrame:(CGRect)containerFrame;
+- (id<VIOSLayoutAttributesItem>)layoutAttributesWithSourceItem:(id<VIOSLayoutSourceItem>)layoutSourceItem fixedWidth:(CGFloat)fixedWidth;
 @end

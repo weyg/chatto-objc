@@ -12,7 +12,6 @@
 
 // protected
 
-- (CGSize)sizeForItem:(id<VIOSLayoutSourceItem>)item containerWidth:(double)width withPrevItemBounds:(CGRect)prevItemBounds prevItemCenter:(CGPoint)prevItemCenter;
 - (CGFloat)verticalCenterForItem:(id<VIOSLayoutSourceItem>)item containerWidth:(double)width withPrevItemBounds:(CGRect)prevItemBounds prevItemCenter:(CGPoint)prevItemCenter;
 - (CGFloat)horizontalCenterForItem:(id<VIOSLayoutSourceItem>)item containerWidth:(double)width withPrevItemBounds:(CGRect)prevItemBounds prevItemCenter:(CGPoint)prevItemCenter;
 

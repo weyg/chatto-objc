@@ -23,6 +23,7 @@
 		3E2483681C9C0FAE00C167EA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 3E2483671C9C0FAE00C167EA /* Podfile */; };
 		3E24836A1C9C155C00C167EA /* VIOSLayoutMakerSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2483691C9C155C00C167EA /* VIOSLayoutMakerSpecs.m */; };
 		3E24836E1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E24836D1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m */; };
+		3E5C60351CA00B200016B16B /* LayoutSourceItemStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5C60341CA00B200016B16B /* LayoutSourceItemStub.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		3E24836B1C9C4DCE00C167EA /* VIOSChatLayoutMaker_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VIOSChatLayoutMaker_Private.h; sourceTree = "<group>"; };
 		3E24836C1C9C646000C167EA /* VIOSLayoutAttributesItemObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSLayoutAttributesItemObject.h; sourceTree = "<group>"; };
 		3E24836D1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIOSLayoutAttributesItemObject.m; sourceTree = "<group>"; };
+		3E5C60331CA00B200016B16B /* LayoutSourceItemStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutSourceItemStub.h; sourceTree = "<group>"; };
+		3E5C60341CA00B200016B16B /* LayoutSourceItemStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutSourceItemStub.m; sourceTree = "<group>"; };
 		B8743E43CE2E842D10D30576 /* Pods-MessagesCollectionViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesCollectionViewTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesCollectionViewTests/Pods-MessagesCollectionViewTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +144,8 @@
 				3E2483621C9AE77300C167EA /* VIOSChatLayoutMaker.m */,
 				3E24836C1C9C646000C167EA /* VIOSLayoutAttributesItemObject.h */,
 				3E24836D1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m */,
+				3E5C60331CA00B200016B16B /* LayoutSourceItemStub.h */,
+				3E5C60341CA00B200016B16B /* LayoutSourceItemStub.m */,
 				3E2483491C9ACF9800C167EA /* VIOSChatCell.h */,
 				3E24834A1C9ACF9800C167EA /* VIOSChatCell.m */,
 				3E24834C1C9ACFAB00C167EA /* VIOSChatPresenter.h */,
@@ -379,6 +384,7 @@
 				3E24831D1C9ACF0400C167EA /* main.m in Sources */,
 				3E24834E1C9ACFAB00C167EA /* VIOSChatPresenter.m in Sources */,
 				3E24836E1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m in Sources */,
+				3E5C60351CA00B200016B16B /* LayoutSourceItemStub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

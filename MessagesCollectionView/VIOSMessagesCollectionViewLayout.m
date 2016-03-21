@@ -11,37 +11,7 @@
 #import "VIOSLayoutItemProtocol.h"
 #import "VIOSChatLayoutMaker.h"
 
-@interface LayoutSourceItemStub : NSObject <VIOSLayoutSourceItem>
-
-@property (nonatomic, assign) CGFloat height;
-@property (nonatomic, strong) NSArray <id<VIOSLayoutSourceItem>>* items;
-
-- (instancetype)initWithHeight:(CGFloat)height;
-- (instancetype)initWithHeight:(CGFloat)height items:(NSArray <id<VIOSLayoutSourceItem>>*)items;
-
-@end
-@implementation LayoutSourceItemStub
-
-- (CGFloat)heightWithFixedWith:(CGFloat)fixedWidth {
-    return self.height;
-}
-
-- (instancetype)initWithHeight:(CGFloat)height
-{
-    return [self initWithHeight:height items:nil];
-}
-
-- (instancetype)initWithHeight:(CGFloat)height items:(NSArray <id<VIOSLayoutSourceItem>>*)items
-{
-    self = [super init];
-    if (self) {
-        _height = height;
-        _items = items;
-    }
-    return self;
-}
-
-@end
+#import "LayoutSourceItemStub.h"
 
 @interface VIOSMessagesCollectionViewLayout ()
 @property (nonatomic, assign) CGSize contentSize;
@@ -76,8 +46,6 @@
     CGSize size = [self.delegate collectionViewSize];
     CGFloat width = size.width;
     
-    CGRect containerFrame = CGRectMake(0, 0, width, 500);
-    
     NSMutableArray *sections = [NSMutableArray new];
     for(NSInteger i=0; i<4; i++) {
         NSArray *its = @[
@@ -93,7 +61,7 @@
     VIOSChatLayoutMaker *sut = [VIOSChatLayoutMaker new];
     
     self.resultingAttributesItem =
-    [sut layoutAttributesWithSourceItem:sourceItem containerFrame:containerFrame];
+    [sut layoutAttributesWithSourceItem:sourceItem fixedWidth:width];
     
     self.contentSize = [self.resultingAttributesItem size];
 }
