@@ -6,14 +6,14 @@
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "VIOSMessagesCollectionViewController.h"
+#import "VIOSChatViewController.h"
 
 typedef enum : NSUInteger {
     VIOSCellVerticalEdgeTop,
     VIOSCellVerticalEdgeBottom,
 } VIOSCellVerticalEdge;
 
-@interface VIOSMessagesCollectionViewController (Scrolling)
+@interface VIOSChatViewController (Scrolling)
 - (BOOL)isScrolledAtBottom;
 - (BOOL)isScrolledAtTop;
 - (BOOL)isCloseToBottom;

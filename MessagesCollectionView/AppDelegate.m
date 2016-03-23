@@ -17,6 +17,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSAttributedString *test =
+    //[[NSAttributedString alloc] initWithString:@"testtesttesttesttesttesttesttesttesttest" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:22.f]}];
+    [[NSAttributedString alloc] initWithData:[@"<body>testtesttesttesttesttesttesttesttesttesttesttesttesttesttest</body>" dataUsingEncoding:NSUTF8StringEncoding]
+                                     options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                               NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                          documentAttributes:nil
+                                       error:nil];
+
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       
+        NSLog(@"try to calculate");
+        assert(![NSThread isMainThread]);
+        
+        CGRect testSize =
+        [test boundingRectWithSize:CGSizeMake(100, CGFLOAT_MAX)
+                           options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                           context:nil];
+        
+        NSLog(@"size (w: %0.2lf, h: %0.2lf)", testSize.size.width, testSize.size.height);
+        
+    });
+    
     return YES;
 }
 

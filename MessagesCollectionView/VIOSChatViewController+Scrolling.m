@@ -6,11 +6,11 @@
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "VIOSMessagesCollectionViewController+Scrolling.h"
+#import "VIOSChatViewController+Scrolling.h"
 
 static const CGFloat VIOSAutoloadingFractionalThreshold = 0.5;
 
-@implementation VIOSMessagesCollectionViewController (Scrolling)
+@implementation VIOSChatViewController (Scrolling)
 
 - (BOOL)isScrolledAtBottom {
     if( [self.collectionView numberOfSections] == 0 || [self.collectionView numberOfItemsInSection:0] == 0) {
