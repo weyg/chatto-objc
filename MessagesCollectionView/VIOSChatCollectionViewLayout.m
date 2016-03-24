@@ -28,6 +28,14 @@
 
 @implementation VIOSChatCollectionViewLayout
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        _layoutNeedsUpdate = YES;
+    }
+    return self;
+}
+
 - (void)invalidateLayout {
     [super invalidateLayout];
     self.layoutNeedsUpdate = YES;

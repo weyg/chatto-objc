@@ -13,4 +13,5 @@
 
 @interface VIOSChatViewController (Changes) <VIOSChatDataSourceDelegateProtocol, VIOSChatCollectionViewLayoutDelegate>
 - (double)focusPosition;
+- (void)enqueueModelUpdate:(VIOSChatUpdateType)context;
 @end

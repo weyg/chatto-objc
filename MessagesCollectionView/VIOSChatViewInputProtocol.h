@@ -11,12 +11,12 @@
 #import "VIOSChatChangeTypes.h"
 
 @protocol VIOSChatViewInputProtocol
-
-- (void)beginUpdates;
-- (void)endUpdates;
-
-- (void)updateSectionAtIndex:(NSInteger)sectionIndex changeType:(VIOSChatChangeType)type;
-- (void)updateMessageAtIndexPath:(NSIndexPath *)oldIndexPath newIndexPath:(NSIndexPath *)newIndexPath changeType:(VIOSChatChangeType)type;
+//
+//- (void)beginUpdates;
+//- (void)endUpdates;
+//
+//- (void)updateSectionAtIndex:(NSInteger)sectionIndex changeType:(VIOSChatChangeType)type;
+//- (void)updateMessageAtIndexPath:(NSIndexPath *)oldIndexPath newIndexPath:(NSIndexPath *)newIndexPath changeType:(VIOSChatChangeType)type;
 
 //- (void)finishedLoadPage;
 //- (void)showHUD;

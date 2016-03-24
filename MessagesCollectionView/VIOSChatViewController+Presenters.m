@@ -8,6 +8,28 @@
 
 #import "VIOSChatViewController+Presenters.h"
 
+@interface VIOSChatItemCellPresenterObject : NSObject <ChatItemPresenterProtocol>
+@end
+@implementation VIOSChatItemCellPresenterObject
+
++ (void)registerCels:(UICollectionView*)collectionView {
+}
+
+- (BOOL)canCalculateHeightInBackground { return YES; }
+- (CGFloat)heightForCell:(CGFloat)maximumWidth decorationAttributes:(id<ChatItemDecorationAttributesProtocol>)decorationAttributes {
+    return 50 + [decorationAttributes topMargin] + [decorationAttributes bottomMargin];
+}
+
+- (UICollectionViewCell*)dequeueCell:(UICollectionView*)collectionView indexPath:(NSIndexPath*)indexPath {
+    return [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+}
+
+- (void)configureCell:(UICollectionViewCell*)cell decorationAttributes:(id<ChatItemDecorationAttributesProtocol>)decorationAttributes {
+    
+}
+
+@end
+
 @implementation VIOSChatViewController (Presenters)
 //public func presenterForIndex(index: Int, decoratedChatItems: [DecoratedChatItem]) -> ChatItemPresenterProtocol {
 //    guard index < decoratedChatItems.count else {
@@ -36,5 +58,49 @@
 //public func decorationAttributesForIndexPath(indexPath: NSIndexPath) -> ChatItemDecorationAttributesProtocol? {
 //    return self.decoratedChatItems[indexPath.item].decorationAttributes
 //}
+
+- (id<ChatItemPresenterProtocol>)presenterForIndexPath:(NSIndexPath*)indexPath {
+    return [self presenterForIndex:indexPath.row decoratedChatItems:self.decoratedChatItems];
+}
+
+- (id<ChatItemPresenterProtocol>)presenterForIndex:(NSInteger)index
+                                decoratedChatItems:(NSArray<id<VIOSDecoratedChatItem>>*)decoratedChatItems
+{
+    if (index < decoratedChatItems.count) {
+        return [VIOSChatItemCellPresenterObject new];
+    }
+    
+    id item = self.decoratedChatItems[index];
+    id presenter = [self.presentersByChatItem objectForKey:item];
+    if (presenter) {
+        return presenter;
+    }
+    
+    presenter = [VIOSChatItemCellPresenterObject new];
+    [self.presentersByChatItem setObject:presenter forKey:item];
+    
+    return presenter;
+}
+
+- (id<ChatItemDecorationAttributesProtocol>)decorationAttributesForIndexPath:(NSIndexPath*)indexPath
+{
+    return [self.decoratedChatItems[indexPath.item] decorationAttributes];
+}
+
+#pragma mark - DataSource -
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [self.decoratedChatItems count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    return cell;
+}
+
 
 @end

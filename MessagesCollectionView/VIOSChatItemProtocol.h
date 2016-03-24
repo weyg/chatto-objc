@@ -8,6 +8,8 @@
 
 #import "VIOSUniqueIdentificable.h"
 
+#import <UIKit/UIKit.h>
+
 @protocol VIOSChatItemProtocol <NSObject, VIOSUniqueIdentificable>
 @property (nonatomic, readonly) NSString *type;
 @end
@@ -20,6 +22,13 @@
 @protocol VIOSDecoratedChatItem
 @property (nonatomic, readonly) id<VIOSChatItemProtocol> chatItem;
 @property (nonatomic, readonly) id<ChatItemDecorationAttributesProtocol> decorationAttributes;
+@end
+
+@interface VIOSDecorateChatItemObject : NSObject <VIOSDecoratedChatItem>
+@property (nonatomic, strong) id<VIOSChatItemProtocol> chatItem;
+@property (nonatomic, strong) id<ChatItemDecorationAttributesProtocol> decorationAttributes;
+- (instancetype)initWithChatItem:(id<VIOSChatItemProtocol>)chatItem
+                      attributes:(id<ChatItemDecorationAttributesProtocol>)attributes;
 @end
 
 @protocol ChatItemPresenterProtocol <NSObject>

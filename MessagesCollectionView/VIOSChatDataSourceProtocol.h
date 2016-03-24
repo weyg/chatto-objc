@@ -38,8 +38,8 @@
 
 - (BOOL)hasMoreNext;
 - (BOOL)hasMorePrevious;
-- (NSArray <id<VIOSChatItemProtocol>> *)chatItems;
-@property (weak, nonatomic) id<VIOSChatDataSourceDelegateProtocol> delegate;
+@property (nonatomic, readonly) NSArray <id<VIOSChatItemProtocol>> *chatItems;
+@property (nonatomic, weak) id<VIOSChatDataSourceDelegateProtocol> delegate;
 
 - (void)loadNext:(void(^)())completion;
 - (void)loadPrevious:(void(^)())completion;

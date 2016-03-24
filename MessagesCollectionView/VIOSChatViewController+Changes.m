@@ -19,22 +19,10 @@
 #import "VIOSChatViewController+Scrolling.h"
 #import "VIOSChatViewController+Presenters.h"
 
+#import "CollectionChanges.h"
 
 static NSInteger preferredMaxMessageCount = 500;
-
-@protocol CollectionChangeMove // Equatable, Hashable
-@property (nonatomic, readonly) NSIndexPath *indexPathOld;
-@property (nonatomic, readonly) NSIndexPath *indexPathNew;
-//
-//var hashValue: Int { return indexPathOld.hash ^ indexPathNew.hash }
-//
-@end
-
-@protocol CollectionChanges
-@property (nonatomic, readonly) NSSet<NSIndexPath*> *insertedIndexPaths;
-@property (nonatomic, readonly) NSSet<NSIndexPath*> *deletedIndexPaths;
-@property (nonatomic, readonly) NSArray<id<CollectionChangeMove>> *movedIndexPaths;
-@end
+static double updatesAnimationDuration = 0.35;
 
 @interface IntermediateItemLayoutData : NSObject <VIOSItemLayoutData>
 @property (nonatomic, assign) CGFloat height;
@@ -43,10 +31,54 @@ static NSInteger preferredMaxMessageCount = 500;
 @property (nonnull, strong) NSArray <id<VIOSItemLayoutData>> *items;
 - (instancetype)initWithHeight:(CGFloat)height topMargin:(CGFloat)topMargin bottomMargin:(CGFloat)bottomMargin items:(NSArray <id<VIOSItemLayoutData>> *)items;
 @end
+@implementation IntermediateItemLayoutData
+- (instancetype)initWithHeight:(CGFloat)height topMargin:(CGFloat)topMargin bottomMargin:(CGFloat)bottomMargin items:(NSArray <id<VIOSItemLayoutData>> *)items
+{
+    self = [super init];
+    if (self) {
+        _height = height;
+        _bottomMargin = bottomMargin;
+        _topMargin = topMargin;
+    }
+    return self;
+}
+@end
 
 @protocol ModelChanges <NSObject>
-- (id<CollectionChanges>)changes;
-- (void(^)())updateModelClosure;
+@property (nonatomic, readonly) id<CollectionChanges> changes;
+@property (nonatomic, readonly) void(^updateModelClosure)();
+@end
+
+@interface ModelChangesItem : NSObject <ModelChanges>
+@property (nonatomic, readonly) id<CollectionChanges> changes;
+@property (nonatomic, readonly) void(^updateModelClosure)();
+- (instancetype)initWithChanges:(id<CollectionChanges>)changes
+             updateModelClosure:(void(^)())updateModelClosure;
+@end
+@implementation ModelChangesItem
+- (instancetype)initWithChanges:(id<CollectionChanges>)changes
+             updateModelClosure:(void(^)())updateModelClosure;
+{
+    self = [super init];
+    if (self) {
+        _changes = changes;
+        _updateModelClosure = updateModelClosure;
+    }
+    return self;
+}
+@end
+
+@implementation VIOSDecorateChatItemObject
+- (instancetype)initWithChatItem:(id<VIOSChatItemProtocol>)chatItem
+                      attributes:(id<ChatItemDecorationAttributesProtocol>)attributes
+{
+    self = [super init];
+    if (self) {
+        _chatItem = chatItem;
+        _decorationAttributes = attributes;
+    }
+    return self;
+}
 @end
 
 typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
@@ -153,59 +185,54 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     }
 }
 
-- (void)performBatchUpdates:(void(^)())updateModelClosure changes:(id<CollectionChanges>)changes context:(VIOSChatUpdateType)context completion:(void(^)())completion {
+- (void)performBatchUpdates:(void(^)())updateModelClosure
+                    changes:(id<CollectionChanges>)changes
+                    context:(VIOSChatUpdateType)context completion:(void(^)())completion
+{
+    BOOL shouldScrollToBottom = context != VIOSChatUpdatePagination && self.isScrolledAtBottom;
+    CGRect oldRect = [self rectAtIndexPath:[[changes movedIndexPaths].firstObject indexPathOld]];
+    void(^myCompletion)() = ^{
+        // Found that cells may not match correct index paths here yet! (see comment below)
+        // Waiting for next loop seems to fix the issue
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion();
+        });
+    };
     
-}
-//func performBatchUpdates(
-//                         updateModelClosure updateModelClosure: () -> Void,
-//                         changes: CollectionChanges,
-//                         context: UpdateContext,
-//                         completion: () -> Void) {
-//    let shouldScrollToBottom = context != .Pagination && self.isScrolledAtBottom()
-//    let oldRect = self.rectAtIndexPath(changes.movedIndexPaths.first?.indexPathOld)
-//    let myCompletion = {
-//        // Found that cells may not match correct index paths here yet! (see comment below)
-//        // Waiting for next loop seems to fix the issue
-//        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//            completion()
-//        })
-//    }
-//    
-//    if context == .Normal {
-//        //                NSLog("normal update")
-//        UIView.animateWithDuration(self.constants.updatesAnimationDuration, animations: { () -> Void in
-//            self.collectionView.performBatchUpdates({ () -> Void in
-//                // We want to update visible cells to support easy removal of bubble tail or any other updates that may be needed after a data update
-//                // Collection view state is not constistent after performBatchUpdates. It can happen that we ask a cell for an index path and we still get the old one.
-//                // Visible cells can be either updated in completion block (easier but with delay) or before, taking into account if some cell is gonna be moved
-//                
-//                updateModelClosure()
-//                self.updateVisibleCells(changes)
-//                
-//                self.collectionView.deleteItemsAtIndexPaths(Array(changes.deletedIndexPaths))
-//                self.collectionView.insertItemsAtIndexPaths(Array(changes.insertedIndexPaths))
+    if (context == VIOSChatUpdateNormal) {
+        [UIView animateWithDuration:updatesAnimationDuration animations:^{
+            [self.collectionView performBatchUpdates:^{
+            // We want to update visible cells to support easy removal of bubble tail or any other updates that may be needed after a data update
+            // Collection view state is not constistent after performBatchUpdates. It can happen that we ask a cell for an index path and we still get the old one.
+            // Visible cells can be either updated in completion block (easier but with delay) or before, taking into account if some cell is gonna be moved
+
+                updateModelClosure();
+                [self updateVisibleCells:changes];
+                
+                [self.collectionView deleteItemsAtIndexPaths:[[changes deletedIndexPaths] allObjects]];
+                [self.collectionView insertItemsAtIndexPaths:[[changes insertedIndexPaths] allObjects]];
+
 //                for move in changes.movedIndexPaths {
 //                    self.collectionView.moveItemAtIndexPath(move.indexPathOld, toIndexPath: move.indexPathNew)
 //                }
-//            }) { (finished) -> Void in
-//                myCompletion()
-//            }
-//        })
-//    } else {
-//        //                NSLog("reload data")
-//        updateModelClosure()
-//        self.collectionView.reloadData()
-//        self.collectionView.collectionViewLayout.prepareLayout()
-//        myCompletion()
-//    }
-//    
-//    if shouldScrollToBottom {
-//        self.scrollToBottom(animated: context == .Normal)
-//    } else {
-//        let newRect = self.rectAtIndexPath(changes.movedIndexPaths.first?.indexPathNew)
-//        self.scrollToPreservePosition(oldRefRect: oldRect, newRefRect: newRect)
-//    }
-//}
+            } completion:^(BOOL finished) {
+                myCompletion();
+            }];
+        }];
+    } else {
+        updateModelClosure();
+        [self.collectionView reloadData];
+        [self.collectionView.collectionViewLayout prepareLayout];
+        myCompletion();
+    }
+    
+    if (shouldScrollToBottom) {
+        [self scrollToBottom:(context == VIOSChatUpdateNormal)];
+    } else {
+        CGRect newRect = [self rectAtIndexPath:[[[changes movedIndexPaths] firstObject] indexPathNew]];
+        [self scrollToPreservePositionWithOldRect:oldRect newRect:newRect];
+    }
+}
 
 - (void)updateModels:(NSArray<id<VIOSChatItemProtocol>>*)newItems oldItems:(NSArray<id<VIOSChatItemProtocol>>*)oldItems context:(VIOSChatUpdateType)context completion:(void(^)())completion {
     CGFloat collectionViewWidth = self.collectionView.bounds.size.width;
@@ -242,23 +269,35 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     }
 }
 
-- (id<ModelChanges>)createModelUpdates:(NSArray<id<VIOSChatItemProtocol>>*)newItems oldItems:(NSArray<id<VIOSChatItemProtocol>>*)oldItems collectionViewWidth:(double)collectionViewWidth {
-    return nil;
+- (id<ModelChanges>)createModelUpdates:(NSArray<id<VIOSChatItemProtocol>>*)newItems
+                              oldItems:(NSArray<id<VIOSChatItemProtocol>>*)oldItems
+                   collectionViewWidth:(double)collectionViewWidth
+{
     
+    NSArray<id<VIOSDecoratedChatItem>> *newDecoratedItems;
+    if (self.chatItemsDecorator) {
+        newDecoratedItems = [self.chatItemsDecorator decorateItems:newItems];
+    } else {
+        newDecoratedItems = [newItems bk_map:^id(id obj) {
+            return [[VIOSDecorateChatItemObject alloc] initWithChatItem:obj attributes:nil];
+        }];
+    }
+    
+    id<CollectionChanges> changes =
+    [CollectionChanges generageChangesWithOldCollection:oldItems newCollection:newItems];
+    
+    id layoutModel = [self createLayoutModel:newDecoratedItems collectionViewWidth:collectionViewWidth];
+    
+    __weak typeof(self) wSelf = self;
+    id updateModelClosure = ^{
+        __strong typeof(self) sSelf = wSelf;
+        
+        sSelf.layoutModel = layoutModel;
+        sSelf.decoratedChatItems = newDecoratedItems;
+    };
+    
+    return [[ModelChangesItem alloc] initWithChanges:changes updateModelClosure:updateModelClosure];
 }
-//private func createModelUpdates(newItems newItems: [ChatItemProtocol], oldItems: [ChatItemProtocol], collectionViewWidth: CGFloat) -> (changes: CollectionChanges, updateModelClosure: () -> Void) {
-//    let newDecoratedItems = self.chatItemsDecorator?.decorateItems(newItems) ?? newItems.map { DecoratedChatItem(chatItem: $0, decorationAttributes: nil) }
-//    let changes = Chatto.generateChanges(
-//                                         oldCollection: oldItems.map { $0 },
-//                                         newCollection: newDecoratedItems.map { $0.chatItem })
-//    let layoutModel = self.createLayoutModel(newDecoratedItems, collectionViewWidth: collectionViewWidth)
-//    let updateModelClosure : () -> Void = { [weak self] in
-//        self?.layoutModel = layoutModel
-//        self?.decoratedChatItems = newDecoratedItems
-//    }
-//    return (changes, updateModelClosure)
-//}
-
 
 - (VIOSChatCollectionViewLayoutModel *)createLayoutModel:(NSArray<id<VIOSDecoratedChatItem>>*)decoratedItems collectionViewWidth:(double)collectionViewWidth {
     BOOL isInbackground = ![NSThread isMainThread];
@@ -299,7 +338,9 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
 
 - (VIOSChatCollectionViewLayoutModel *)chatCollectionViewLayoutModel {
     if (self.layoutModel.calculatedForWidth != self.collectionView.bounds.size.width) {
-        self.layoutModel = [self createLayoutModel:self.decoratedChatItems collectionViewWidth:self.collectionView.bounds.size.width];
+        self.layoutModel =
+        [self createLayoutModel:self.decoratedChatItems
+            collectionViewWidth:self.collectionView.bounds.size.width];
     }
     return self.layoutModel;
 }
