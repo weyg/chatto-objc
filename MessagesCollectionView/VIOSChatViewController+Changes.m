@@ -212,9 +212,10 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
                 [self.collectionView deleteItemsAtIndexPaths:[[changes deletedIndexPaths] allObjects]];
                 [self.collectionView insertItemsAtIndexPaths:[[changes insertedIndexPaths] allObjects]];
 
-//                for move in changes.movedIndexPaths {
-//                    self.collectionView.moveItemAtIndexPath(move.indexPathOld, toIndexPath: move.indexPathNew)
-//                }
+                for (id<CollectionChangeMove> move in [changes movedIndexPaths]) {
+                    [self.collectionView moveItemAtIndexPath:[move indexPathOld] toIndexPath:[move indexPathNew]];
+                }
+
             } completion:^(BOOL finished) {
                 myCompletion();
             }];
