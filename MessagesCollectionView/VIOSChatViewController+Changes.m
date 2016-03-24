@@ -190,7 +190,11 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
                     context:(VIOSChatUpdateType)context completion:(void(^)())completion
 {
     BOOL shouldScrollToBottom = context != VIOSChatUpdatePagination && self.isScrolledAtBottom;
-    CGRect oldRect = [self rectAtIndexPath:[[changes movedIndexPaths].firstObject indexPathOld]];
+    CGRect *oldRect = nil, t1, t2;
+    if ([changes movedIndexPaths].firstObject) {
+        t1 = [self rectAtIndexPath:[[changes movedIndexPaths].firstObject indexPathOld]];
+        oldRect = &t1;
+    }
     void(^myCompletion)() = ^{
         // Found that cells may not match correct index paths here yet! (see comment below)
         // Waiting for next loop seems to fix the issue
@@ -230,7 +234,11 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     if (shouldScrollToBottom) {
         [self scrollToBottom:(context == VIOSChatUpdateNormal)];
     } else {
-        CGRect newRect = [self rectAtIndexPath:[[[changes movedIndexPaths] firstObject] indexPathNew]];
+        CGRect *newRect = nil;
+        if ([[changes movedIndexPaths] firstObject]) {
+            t2 = [self rectAtIndexPath:[[[changes movedIndexPaths] firstObject] indexPathNew]];
+            newRect = &t2;
+        }
         [self scrollToPreservePositionWithOldRect:oldRect newRect:newRect];
     }
 }

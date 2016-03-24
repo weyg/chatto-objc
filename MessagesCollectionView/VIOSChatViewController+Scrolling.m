@@ -79,8 +79,9 @@ static const CGFloat VIOSAutoloadingFractionalThreshold = 0.5;
     [self.collectionView setContentOffset:CGPointMake(0, offsetY) animated:animated];
 }
 
-- (void)scrollToPreservePositionWithOldRect:(CGRect)oldRect newRect:(CGRect)newRect {
-    CGFloat diffY = CGRectGetMinY(newRect) - CGRectGetMinY(oldRect);
+- (void)scrollToPreservePositionWithOldRect:(CGRect*)oldRectRef newRect:(CGRect*)newRectRef {
+    if (!oldRectRef || !newRectRef) { return; }
+    CGFloat diffY = CGRectGetMinY(*newRectRef) - CGRectGetMinY(*oldRectRef);
     [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.contentOffset.y + diffY)];
 }
 

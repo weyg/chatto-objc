@@ -21,5 +21,5 @@ typedef enum : NSUInteger {
 - (BOOL)isIndexPathVisible:(NSIndexPath*)indexPath atEdge:(VIOSCellVerticalEdge)edge;
 - (CGRect)visibleRect;
 - (void)scrollToBottom:(BOOL)animated;
-- (void)scrollToPreservePositionWithOldRect:(CGRect)oldRect newRect:(CGRect)newRect;
+- (void)scrollToPreservePositionWithOldRect:(CGRect*)oldRectRef newRect:(CGRect*)newRectRef;
 @end
