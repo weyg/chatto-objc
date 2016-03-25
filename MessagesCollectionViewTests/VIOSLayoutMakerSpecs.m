@@ -1,5 +1,5 @@
 //
-//  VIOSLayoutMakerSpecs.m
+//  BMALayoutMakerSpecs.m
 //  MessagesCollectionView
 //
 //  Created by Aziz Latypov on 18/03/16.
@@ -11,20 +11,20 @@
 #import <Expecta/Expecta.h>
 #import <OCMock/OCMock.h>
 
-#import "VIOSChatLayoutMaker.h"
+#import "BMAChatLayoutMaker.h"
 
-#import "VIOSLayoutAttributesItemObject.h"
+#import "BMALayoutAttributesItemObject.h"
 #import "LayoutSourceItemStub.h"
 
 SpecBegin(LayoutMaker)
 
 describe(@"sut", ^{
-    __block VIOSChatLayoutMaker *sut;
+    __block BMAChatLayoutMaker *sut;
     
     const CGFloat containerWidth = 100;
     
     beforeEach(^{
-        sut = [VIOSChatLayoutMaker new];
+        sut = [BMAChatLayoutMaker new];
     });
     
     it(@"should layout plain items of fixed height (100)", ^{
@@ -43,18 +43,18 @@ describe(@"sut", ^{
         CGFloat midx = containerWidth/2;
         CGSize sz = CGSizeMake(containerWidth, 100);
         NSArray *expectedAttributesItems = @[
-            [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-50) size:sz],
-            [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-150) size:sz],
-            [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-250) size:sz],
-            [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-350) size:sz],
-            [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-450) size:sz],
-            [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-550) size:sz],
+            [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-50) size:sz],
+            [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-150) size:sz],
+            [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-250) size:sz],
+            [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-350) size:sz],
+            [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-450) size:sz],
+            [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-550) size:sz],
         ];
-        VIOSLayoutAttributesItemObject *expectedAttributesItem =
-        [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointZero size:CGSizeMake(containerWidth, 600) items:expectedAttributesItems];
+        BMALayoutAttributesItemObject *expectedAttributesItem =
+        [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointZero size:CGSizeMake(containerWidth, 600) items:expectedAttributesItems];
         
         // when
-        id<VIOSLayoutAttributesItem> resultingAttributesItem =
+        id<BMALayoutAttributesItem> resultingAttributesItem =
         [sut layoutAttributesWithSourceItem:sourceItem fixedWidth:containerWidth minimalHeight:0];
         
         // then
@@ -80,44 +80,44 @@ describe(@"sut", ^{
         CGSize sz = CGSizeMake(containerWidth, 100);
         NSArray *expectedAttributesItems =
         @[
-          [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-320*0.5)
+          [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-320*0.5)
                                                             size:CGSizeMake(containerWidth, 320)
                                                            items:@[ // bottom section
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-50) size:sz],
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-150) size:sz],
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-250) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-50) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-150) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-250) size:sz],
                                                                    ]],
-          [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-320*1.5)
+          [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-320*1.5)
                                                             size:CGSizeMake(containerWidth, 320)
                                                            items:@[
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-50) size:sz],
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-150) size:sz],
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-250) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-50) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-150) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-250) size:sz],
                                                                    ]],
-          [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-320*2.5)
+          [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-320*2.5)
                                                             size:CGSizeMake(containerWidth, 320)
                                                            items:@[
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-50) size:sz],
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-150) size:sz],
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-250) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-50) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-150) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-250) size:sz],
                                                                    ]],
-          [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-320*3.5)
+          [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, height-320*3.5)
                                                             size:CGSizeMake(containerWidth, 320)
                                                            items:@[ // top section
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-50) size:sz],
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-150) size:sz],
-                                                                   [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-250) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-50) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-150) size:sz],
+                                                                   [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointMake(midx, 320-250) size:sz],
                                                                    ]],
          ];
         
-        VIOSLayoutAttributesItemObject *expectedAttributesItem =
-        [[VIOSLayoutAttributesItemObject alloc] initWithCenter:CGPointZero size:CGSizeMake(containerWidth, height) items:expectedAttributesItems];
+        BMALayoutAttributesItemObject *expectedAttributesItem =
+        [[BMALayoutAttributesItemObject alloc] initWithCenter:CGPointZero size:CGSizeMake(containerWidth, height) items:expectedAttributesItems];
         
         // when
-        id<VIOSLayoutAttributesItem> resultingAttributesItem =
+        id<BMALayoutAttributesItem> resultingAttributesItem =
         [sut layoutAttributesWithSourceItem:sourceItem fixedWidth:containerWidth minimalHeight:0];
-        NSLog(@"expected: \n%@\n===\n", [(VIOSLayoutAttributesItemObject*)expectedAttributesItem debugDescription]);
-        NSLog(@"result: \n%@", [(VIOSLayoutAttributesItemObject*)resultingAttributesItem debugDescription]);
+        NSLog(@"expected: \n%@\n===\n", [(BMALayoutAttributesItemObject*)expectedAttributesItem debugDescription]);
+        NSLog(@"result: \n%@", [(BMALayoutAttributesItemObject*)resultingAttributesItem debugDescription]);
         
         // then
         expect(resultingAttributesItem).equal(expectedAttributesItem);

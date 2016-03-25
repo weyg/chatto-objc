@@ -1,26 +1,21 @@
 //
-//  VIOSMessagesCollectionViewLayout.m
+//  BMAMessagesCollectionViewLayout.m
 //  vipole
 //
 //  Created by Aziz Latypov on 17/03/16.
 //  Copyright © 2016 vipole. All rights reserved.
 //
 
-#import "VIOSChatCollectionViewLayout.h"
+#import "BMAChatCollectionViewLayout.h"
 #import "NSArray+BlockKit.h"
 
-@interface VIOSChatCollectionViewLayout ()
-//@property (nonatomic, assign) CGSize contentSize;
-//@property (nonatomic, strong) NSMutableArray <id<VIOSLayoutSourceItem>> *items;
-//
-//@property (nonatomic, strong) id<VIOSLayoutAttributesItem> resultingAttributesItem;
-
+@interface BMAChatCollectionViewLayout ()
 // Optimization: after reloadData we'll get invalidateLayout, but prepareLayout will be delayed until next run loop.
 // Client may need to force prepareLayout after reloadData, but we don't want to compute layout again in the next run loop.
 @property (nonatomic, assign) BOOL layoutNeedsUpdate;
 @end
 
-@implementation VIOSChatCollectionViewLayout
+@implementation BMAChatCollectionViewLayout
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -41,7 +36,7 @@
     if (!self.layoutNeedsUpdate) { return; }
     if (!self.delegate) { return; }
     
-    __block VIOSChatCollectionViewLayoutModel *oldLayoutModel = self.layoutModel;
+    __block BMAChatCollectionViewLayoutModel *oldLayoutModel = self.layoutModel;
     self.layoutModel = [self.delegate chatCollectionViewLayoutModel];
     self.layoutNeedsUpdate = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

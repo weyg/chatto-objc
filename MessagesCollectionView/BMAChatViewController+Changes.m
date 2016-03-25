@@ -1,38 +1,38 @@
 //
-//  VIOSChatViewController+Changes.m
+//  BMAChatViewController+Changes.m
 //  MessagesCollectionView
 //
 //  Created by Aziz Latypov on 23/03/16.
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "VIOSChatViewController+Changes.h"
+#import "BMAChatViewController+Changes.h"
 
-#import "VIOSChatCollectionViewLayout.h"
-#import "VIOSChatCollectionViewLayoutModel.h"
+#import "BMAChatCollectionViewLayout.h"
+#import "BMAChatCollectionViewLayoutModel.h"
 
-#import "VIOSChatDataSourceProtocol.h"
+#import "BMAChatDataSourceProtocol.h"
 
 #import "NSArray+BlockKit.h"
 #import "NSSet+BlockKit.h"
 
-#import "VIOSChatViewController+Scrolling.h"
-#import "VIOSChatViewController+Presenters.h"
+#import "BMAChatViewController+Scrolling.h"
+#import "BMAChatViewController+Presenters.h"
 
 #import "CollectionChanges.h"
 
 static NSInteger preferredMaxMessageCount = 500;
 static double updatesAnimationDuration = 0.35;
 
-@interface IntermediateItemLayoutData : NSObject <VIOSItemLayoutData>
+@interface IntermediateItemLayoutData : NSObject <BMAItemLayoutData>
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat topMargin;
 @property (nonatomic, assign) CGFloat bottomMargin;
-@property (nonnull, strong) NSArray <id<VIOSItemLayoutData>> *items;
-- (instancetype)initWithHeight:(CGFloat)height topMargin:(CGFloat)topMargin bottomMargin:(CGFloat)bottomMargin items:(NSArray <id<VIOSItemLayoutData>> *)items;
+@property (nonnull, strong) NSArray <id<BMAItemLayoutData>> *items;
+- (instancetype)initWithHeight:(CGFloat)height topMargin:(CGFloat)topMargin bottomMargin:(CGFloat)bottomMargin items:(NSArray <id<BMAItemLayoutData>> *)items;
 @end
 @implementation IntermediateItemLayoutData
-- (instancetype)initWithHeight:(CGFloat)height topMargin:(CGFloat)topMargin bottomMargin:(CGFloat)bottomMargin items:(NSArray <id<VIOSItemLayoutData>> *)items
+- (instancetype)initWithHeight:(CGFloat)height topMargin:(CGFloat)topMargin bottomMargin:(CGFloat)bottomMargin items:(NSArray <id<BMAItemLayoutData>> *)items
 {
     self = [super init];
     if (self) {
@@ -68,8 +68,8 @@ static double updatesAnimationDuration = 0.35;
 }
 @end
 
-@implementation VIOSDecorateChatItemObject
-- (instancetype)initWithChatItem:(id<VIOSChatItemProtocol>)chatItem
+@implementation BMADecoratedChatItemObject
+- (instancetype)initWithChatItem:(id<BMAChatItemProtocol>)chatItem
                       attributes:(id<ChatItemDecorationAttributesProtocol>)attributes
 {
     self = [super init];
@@ -83,17 +83,17 @@ static double updatesAnimationDuration = 0.35;
 
 typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
 
-@implementation VIOSChatViewController (Changes)
+@implementation BMAChatViewController (Changes)
 
-- (void)chatDataSourceDidUpdate:(id<VIOSChatDataSourceProtocol>)chatDataSource context:(VIOSChatUpdateType)context
+- (void)chatDataSourceDidUpdate:(id<BMAChatDataSourceProtocol>)chatDataSource context:(BMAChatUpdateType)context
 {
     [self enqueueModelUpdate:context];
 }
 
-- (void)enqueueModelUpdate:(VIOSChatUpdateType)context {
+- (void)enqueueModelUpdate:(BMAChatUpdateType)context {
     NSArray *newItems = [self.chatDataSource chatItems];
     __weak typeof(self) weakSelf = self;
-    [self.updateQueue addTask:^(VIOSTaskClosureComletion completion) {
+    [self.updateQueue addTask:^(BMATaskClosureComletion completion) {
         __strong typeof(self) sSelf = weakSelf;
         
         NSArray *oldItems = [sSelf.decoratedChatItems bk_map:^(id obj){ return [obj chatItem]; }];
@@ -112,7 +112,7 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     }
     
     __weak typeof(self) weakSelf = self;
-    [self.updateQueue addTask:^(VIOSTaskClosureComletion completion) {
+    [self.updateQueue addTask:^(BMATaskClosureComletion completion) {
         __strong typeof(self) sSelf = weakSelf;
 
         __weak typeof(self) weakSelf = sSelf;
@@ -126,7 +126,7 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
             
             NSArray *newItems = sSelf.chatDataSource.chatItems;
             NSArray *oldItems = [sSelf.decoratedChatItems bk_map:^(id obj){ return [obj chatItem]; }];
-            [sSelf updateModels:newItems oldItems:oldItems context:VIOSChatUpdateMessageCountReduction completion:completion];
+            [sSelf updateModels:newItems oldItems:oldItems context:BMAChatUpdateMessageCountReduction completion:completion];
         }];
     }];
 }
@@ -187,9 +187,9 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
 
 - (void)performBatchUpdates:(void(^)())updateModelClosure
                     changes:(id<CollectionChanges>)changes
-                    context:(VIOSChatUpdateType)context completion:(void(^)())completion
+                    context:(BMAChatUpdateType)context completion:(void(^)())completion
 {
-    BOOL shouldScrollToBottom = context != VIOSChatUpdatePagination && self.isScrolledAtBottom;
+    BOOL shouldScrollToBottom = context != BMAChatUpdatePagination && self.isScrolledAtBottom;
     CGRect *oldRect = nil, t1, t2;
     if ([changes movedIndexPaths].firstObject) {
         t1 = [self rectAtIndexPath:[[changes movedIndexPaths].firstObject indexPathOld]];
@@ -203,7 +203,7 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
         });
     };
     
-    if (context == VIOSChatUpdateNormal) {
+    if (context == BMAChatUpdateNormal) {
         [UIView animateWithDuration:updatesAnimationDuration animations:^{
             [self.collectionView performBatchUpdates:^{
                 // We want to update visible cells to support easy removal of bubble tail or any other updates that may be needed after a data update
@@ -230,7 +230,7 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     }
     
     if (shouldScrollToBottom) {
-        [self scrollToBottom:(context == VIOSChatUpdateNormal)];
+        [self scrollToBottom:(context == BMAChatUpdateNormal)];
     } else {
         CGRect *newRect = nil;
         if ([[changes movedIndexPaths] firstObject]) {
@@ -241,10 +241,10 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     }
 }
 
-- (void)updateModels:(NSArray<id<VIOSChatItemProtocol>>*)newItems oldItems:(NSArray<id<VIOSChatItemProtocol>>*)oldItems context:(VIOSChatUpdateType)context completion:(void(^)())completion {
+- (void)updateModels:(NSArray<id<BMAChatItemProtocol>>*)newItems oldItems:(NSArray<id<BMAChatItemProtocol>>*)oldItems context:(BMAChatUpdateType)context completion:(void(^)())completion {
     CGFloat collectionViewWidth = self.collectionView.bounds.size.width;
-    context = self.isFirstLayout ? VIOSChatUpdateFirstLoad : context;
-    BOOL performInBackground = context != VIOSChatUpdateFirstLoad;
+    context = self.isFirstLayout ? BMAChatUpdateFirstLoad : context;
+    BOOL performInBackground = context != BMAChatUpdateFirstLoad;
 
     self.autoLoadingEnabled = NO;
     
@@ -276,17 +276,17 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     }
 }
 
-- (id<ModelChanges>)createModelUpdates:(NSArray<id<VIOSChatItemProtocol>>*)newItems
-                              oldItems:(NSArray<id<VIOSChatItemProtocol>>*)oldItems
+- (id<ModelChanges>)createModelUpdates:(NSArray<id<BMAChatItemProtocol>>*)newItems
+                              oldItems:(NSArray<id<BMAChatItemProtocol>>*)oldItems
                    collectionViewWidth:(double)collectionViewWidth
 {
     
-    NSArray<id<VIOSDecoratedChatItem>> *newDecoratedItems;
+    NSArray<id<BMADecoratedChatItem>> *newDecoratedItems;
     if (self.chatItemsDecorator) {
         newDecoratedItems = [self.chatItemsDecorator decorateItems:newItems];
     } else {
         newDecoratedItems = [newItems bk_map:^id(id obj) {
-            return [[VIOSDecorateChatItemObject alloc] initWithChatItem:obj attributes:nil];
+            return [[BMADecoratedChatItemObject alloc] initWithChatItem:obj attributes:nil];
         }];
     }
     
@@ -306,13 +306,13 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     return [[ModelChangesItem alloc] initWithChanges:changes updateModelClosure:updateModelClosure];
 }
 
-- (VIOSChatCollectionViewLayoutModel *)createLayoutModel:(NSArray<id<VIOSDecoratedChatItem>>*)decoratedItems collectionViewWidth:(double)collectionViewWidth {
+- (BMAChatCollectionViewLayoutModel *)createLayoutModel:(NSArray<id<BMADecoratedChatItem>>*)decoratedItems collectionViewWidth:(double)collectionViewWidth {
     BOOL isInbackground = ![NSThread isMainThread];
     NSMutableArray *itemsForMainThread = [NSMutableArray new];
     NSMutableArray *intermediateLayoutData = [NSMutableArray new];
     
     for (NSInteger index = 0; index < decoratedItems.count; index++) {
-        id<VIOSDecoratedChatItem> decoratedItem = decoratedItems[index];
+        id<BMADecoratedChatItem> decoratedItem = decoratedItems[index];
         id<ChatItemPresenterProtocol> presenter = [self presenterForIndex:index decoratedChatItems:decoratedItems];
         id<ChatItemDecorationAttributesProtocol> decorationAttributes = [decoratedItem decorationAttributes];
         double height = 0;
@@ -331,7 +331,7 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
         dispatch_sync(dispatch_get_main_queue(), ^{
             for (NSArray *tuple in itemsForMainThread) {
                 NSInteger index = [tuple[0] integerValue];
-                id<VIOSDecoratedChatItem> decoratedItem = tuple[1];
+                id<BMADecoratedChatItem> decoratedItem = tuple[1];
                 id<ChatItemPresenterProtocol> presenter = tuple[2];
 
                 CGFloat height = [presenter heightForCell:collectionViewWidth decorationAttributes:decoratedItem.decorationAttributes];
@@ -340,10 +340,10 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
         });
     }
     
-    return [VIOSChatCollectionViewLayoutModel createModelForCollectionViewWidth:self.collectionView.bounds.size.width itemsLayoutData:intermediateLayoutData];
+    return [BMAChatCollectionViewLayoutModel createModelForCollectionViewWidth:self.collectionView.bounds.size.width itemsLayoutData:intermediateLayoutData];
 }
 
-- (VIOSChatCollectionViewLayoutModel *)chatCollectionViewLayoutModel {
+- (BMAChatCollectionViewLayoutModel *)chatCollectionViewLayoutModel {
     if (self.layoutModel.calculatedForWidth != self.collectionView.bounds.size.width) {
         self.layoutModel =
         [self createLayoutModel:self.decoratedChatItems

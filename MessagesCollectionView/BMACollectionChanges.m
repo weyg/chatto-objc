@@ -6,18 +6,18 @@
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "CollectionChanges.h"
+#import "BMACollectionChanges.h"
 
 #import "NSArray+BlockKit.h"
 
 #import <UIKit/UIKit.h>
 
-@interface CollectionChangeMoveItem : NSObject <CollectionChangeMove>
+@interface BMACollectionChangeMoveItem : NSObject <BMACollectionChangeMove>
 @property (nonatomic, strong) NSIndexPath *indexPathOld;
 @property (nonatomic, strong) NSIndexPath *indexPathNew;
 - (instancetype)initWithIndexPathOld:(NSIndexPath*)indexPathOld indexPathNew:(NSIndexPath*)indexPathNew;
 @end
-@implementation CollectionChangeMoveItem
+@implementation BMACollectionChangeMoveItem
 - (instancetype)initWithIndexPathOld:(NSIndexPath*)indexPathOld indexPathNew:(NSIndexPath*)indexPathNew {
     self = [super init];
     if (self) {
@@ -37,13 +37,13 @@
 }
 @end
 
-@interface CollectionChangesObject : NSObject <CollectionChanges>
+@interface BMACollectionChangesObject : NSObject <BMACollectionChanges>
 @property (nonatomic, strong) NSSet<NSIndexPath*> *insertedIndexPaths;
 @property (nonatomic, strong) NSSet<NSIndexPath*> *deletedIndexPaths;
-@property (nonatomic, strong) NSArray<id<CollectionChangeMove>> *movedIndexPaths;
+@property (nonatomic, strong) NSArray<id<BMACollectionChangeMove>> *movedIndexPaths;
 - (instancetype)initWithInsertedIndexPaths:(NSSet*)insertedIndexPaths deletedIndexPaths:(NSSet*)deletedIndexPaths movedIndexPaths:(NSArray*)movedIndexPaths;
 @end
-@implementation CollectionChangesObject
+@implementation BMACollectionChangesObject
 - (instancetype)initWithInsertedIndexPaths:(NSSet*)insertedIndexPaths deletedIndexPaths:(NSSet*)deletedIndexPaths movedIndexPaths:(NSArray*)movedIndexPaths
 {
     self = [super init];
@@ -56,7 +56,7 @@
 }
 @end
 
-@implementation CollectionChanges
+@implementation BMACollectionChanges
 
 + (NSDictionary<NSString*, NSNumber *>*)generateIndexesById:(NSArray<NSString*>*)uids {
     NSMutableDictionary *map = [[NSMutableDictionary alloc] initWithCapacity:uids.count];
@@ -67,8 +67,8 @@
     return map;
 }
 
-+ (id<CollectionChanges>)generageChangesWithOldCollection:(NSArray<id<VIOSUniqueIdentificable>>*)oldCollection
-                                            newCollection:(NSArray<id<VIOSUniqueIdentificable>>*)newCollection
++ (id<BMACollectionChanges>)generageChangesWithOldCollection:(NSArray<id<BMAUniqueIdentificable>>*)oldCollection
+                                            newCollection:(NSArray<id<BMAUniqueIdentificable>>*)newCollection
 {
     NSArray *oldUids = [oldCollection bk_map:^id(id obj) { return [obj uid]; }];
     NSArray *newUids = [newCollection bk_map:^id(id obj) { return [obj uid]; }];
@@ -95,8 +95,8 @@
             if (oldIndex.integerValue != newIndex) {
                 NSIndexPath *oldIndexPath = [NSIndexPath indexPathForItem:oldIndex.integerValue inSection:0];
                 NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:0];
-                CollectionChangeMoveItem *moveItem =
-                [[CollectionChangeMoveItem alloc] initWithIndexPathOld:oldIndexPath indexPathNew:newIndexPath];
+                BMACollectionChangeMoveItem *moveItem =
+                [[BMACollectionChangeMoveItem alloc] initWithIndexPathOld:oldIndexPath indexPathNew:newIndexPath];
                 [movedIndexPaths addObject:moveItem];
             }
         } else {
@@ -106,9 +106,9 @@
     }
     
     id changes =
-    [[CollectionChangesObject alloc] initWithInsertedIndexPaths:insertedIndexPaths
-                                            deletedIndexPaths:deletedIndexPaths
-                                              movedIndexPaths:movedIndexPaths];
+    [[BMACollectionChangesObject alloc] initWithInsertedIndexPaths:insertedIndexPaths
+                                                 deletedIndexPaths:deletedIndexPaths
+                                                   movedIndexPaths:movedIndexPaths];
     
     return changes;
 }

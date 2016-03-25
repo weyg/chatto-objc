@@ -1,28 +1,28 @@
 //
-//  FakeDataSource.m
+//  BMAFakeDataSource.m
 //  MessagesCollectionView
 //
 //  Created by Latipov Aziz on 24/03/16.
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "FakeDataSource.h"
+#import "BMAFakeDataSource.h"
 
 static NSInteger preferredMaxWindowSize = 500;
 static NSInteger preferredPageSize = 50;
 
-@interface ChatItemObject : NSObject <VIOSChatItemProtocol>
+@interface ChatItemObject : NSObject <BMAChatItemProtocol>
 @property (nonatomic, strong) NSString *uid;
 @property (nonatomic, strong) NSString *type;
 @end
 @implementation ChatItemObject
 @end
 
-@interface FakeDataSource ()
+@interface BMAFakeDataSource ()
 @property (nonatomic, assign) NSInteger lastID;
 @end
 
-@implementation FakeDataSource
+@implementation BMAFakeDataSource
 
 - (instancetype)init
 {
@@ -37,7 +37,7 @@ static NSInteger preferredPageSize = 50;
     
 }
 
-- (NSArray<id<VIOSChatItemProtocol>> *)chatItems {
+- (NSArray<id<BMAChatItemProtocol>> *)chatItems {
     return self.itemsInWindow;
 }
 
@@ -45,7 +45,7 @@ static NSInteger preferredPageSize = 50;
     return [super hasMore];
 }
 
-- (BOOL)hasMorePrevios {
+- (BOOL)hasMorePreBMA {
     return [super hasPrevious];
 }
 
@@ -56,7 +56,7 @@ static NSInteger preferredPageSize = 50;
 }
 
 - (void)loadPrevious:(void(^)())completion {
-    [super loadPrevios];
+    [super loadPreBMA];
     [super adjustWindowWithFocusPosition:0 maxWindowSize:preferredMaxWindowSize];
     completion();
 }
@@ -81,7 +81,7 @@ static NSInteger preferredPageSize = 50;
         [super insertItem:chatItem position:InsertPositionTop];
     }
     
-    [self.delegate chatDataSourceDidUpdate:self context:VIOSChatUpdatePagination];
+    [self.delegate chatDataSourceDidUpdate:self context:BMAChatUpdatePagination];
 }
 
 - (void)appendChatItem {
@@ -94,12 +94,12 @@ static NSInteger preferredPageSize = 50;
 
     [super insertItem:chatItem position:InsertPositionBottom];
     
-    [self.delegate chatDataSourceDidUpdate:self context:VIOSChatUpdateNormal];
+    [self.delegate chatDataSourceDidUpdate:self context:BMAChatUpdateNormal];
 }
 
 - (void)clean {
     [super clean];
-    [self.delegate chatDataSourceDidUpdate:self context:VIOSChatUpdateReload];
+    [self.delegate chatDataSourceDidUpdate:self context:BMAChatUpdateReload];
 }
 
 @end

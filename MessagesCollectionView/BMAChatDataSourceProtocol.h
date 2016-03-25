@@ -1,5 +1,5 @@
 //
-//  VIOSChatDataSourceProtocol.h
+//  BMAChatDataSourceProtocol.h
 //  MessagesCollectionView
 //
 //  Created by Aziz Latypov on 23/03/16.
@@ -25,21 +25,21 @@
 
 #import <Foundation/Foundation.h>
 
-#import "VIOSChatUpdateType.h"
-#import "VIOSChatItemProtocol.h"
+#import "BMAChatUpdateType.h"
+#import "BMAChatItemProtocol.h"
 
-@protocol VIOSChatDataSourceProtocol;
+@protocol BMAChatDataSourceProtocol;
 
-@protocol VIOSChatDataSourceDelegateProtocol
-- (void)chatDataSourceDidUpdate:(id<VIOSChatDataSourceProtocol>)chatDataSource context:(VIOSChatUpdateType)context;
+@protocol BMAChatDataSourceDelegateProtocol
+- (void)chatDataSourceDidUpdate:(id<BMAChatDataSourceProtocol>)chatDataSource context:(BMAChatUpdateType)context;
 @end
 
-@protocol VIOSChatDataSourceProtocol
+@protocol BMAChatDataSourceProtocol
 
 - (BOOL)hasMoreNext;
-- (BOOL)hasMorePrevios;
-@property (nonatomic, readonly) NSArray <id<VIOSChatItemProtocol>> *chatItems;
-@property (nonatomic, weak) id<VIOSChatDataSourceDelegateProtocol> delegate;
+- (BOOL)hasMorePreBMA;
+@property (nonatomic, readonly) NSArray <id<BMAChatItemProtocol>> *chatItems;
+@property (nonatomic, weak) id<BMAChatDataSourceDelegateProtocol> delegate;
 
 - (void)loadNext:(void(^)())completion;
 - (void)loadPrevious:(void(^)())completion;

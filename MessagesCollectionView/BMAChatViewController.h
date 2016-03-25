@@ -1,5 +1,5 @@
 //
-//  VIOSMessagesCollectionViewController.h
+//  BMAMessagesCollectionViewController.h
 //  vipole
 //
 //  Created by Aziz Latypov on 17/03/16.
@@ -8,29 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
-#import "VIOSChatDataSourceProtocol.h"
-#import "VIOSSerialQueue.h"
+#import "BMAChatDataSourceProtocol.h"
+#import "BMASerialQueue.h"
 
-#import "VIOSChatItemProtocol.h"
+#import "BMAChatItemProtocol.h"
 
-#import "VIOSChatCollectionViewLayout.h"
-#import "VIOSChatCollectionViewLayoutModel.h"
+#import "BMAChatCollectionViewLayout.h"
+#import "BMAChatCollectionViewLayoutModel.h"
 
 @protocol ChatItemsDecoratorProtocol
--(NSArray<id<VIOSDecoratedChatItem>>*)decorateItems:(NSArray<id<VIOSChatItemProtocol>>*)chatItems;
+-(NSArray<id<BMADecoratedChatItem>>*)decorateItems:(NSArray<id<BMAChatItemProtocol>>*)chatItems;
 @end
 
-@interface VIOSChatViewController : UICollectionViewController
+@interface BMAChatViewController : UICollectionViewController
 
-@property (nonatomic, strong) id<VIOSChatDataSourceProtocol> chatDataSource;
-@property (nonatomic, strong) id<VIOSSerialQueueProtocol> updateQueue;
-@property (nonatomic, strong) NSArray<id<VIOSDecoratedChatItem>> *decoratedChatItems;
-@property (nonatomic, strong) VIOSChatCollectionViewLayoutModel *layoutModel;
+@property (nonatomic, strong) id<BMAChatDataSourceProtocol> chatDataSource;
+@property (nonatomic, strong) id<BMASerialQueueProtocol> updateQueue;
+@property (nonatomic, strong) NSArray<id<BMADecoratedChatItem>> *decoratedChatItems;
+@property (nonatomic, strong) BMAChatCollectionViewLayoutModel *layoutModel;
 @property (nonatomic, assign) BOOL isFirstLayout;
 @property (nonatomic, assign) BOOL autoLoadingEnabled;
 
 @property (nonatomic, strong) NSArray<id<ChatItemPresenterProtocol>> *presenters;
-@property (nonatomic, strong) NSMapTable<id<VIOSChatItemProtocol>,id<ChatItemPresenterProtocol>> *presentersByChatItem;
+@property (nonatomic, strong) NSMapTable<id<BMAChatItemProtocol>,id<ChatItemPresenterProtocol>> *presentersByChatItem;
 @property (nonatomic, strong) NSMapTable<UICollectionViewCell*,id<ChatItemPresenterProtocol>> *presentersByCell;
 
 /**

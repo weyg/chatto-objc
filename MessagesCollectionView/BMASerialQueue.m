@@ -1,20 +1,20 @@
 //
-//  VIOSSerialQueue.m
+//  BMASerialQueue.m
 //  MessagesCollectionView
 //
 //  Created by Aziz Latypov on 23/03/16.
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "VIOSSerialQueue.h"
+#import "BMASerialQueue.h"
 
-@interface VIOSSerialQueue ()
+@interface BMASerialQueue ()
 @property (nonatomic, assign) BOOL isBusy;
 @property (nonatomic, assign) BOOL isStopped;
-@property (nonatomic, strong) NSMutableArray <VIOSTaskClosure>* taskQueue;
+@property (nonatomic, strong) NSMutableArray <BMATaskClosure>* taskQueue;
 @end
 
-@implementation VIOSSerialQueue
+@implementation BMASerialQueue
 
 - (instancetype)init
 {
@@ -25,7 +25,7 @@
     return self;
 }
 
-- (void)addTask:(VIOSTaskClosure)task {
+- (void)addTask:(BMATaskClosure)task {
     [self.taskQueue addObject:task];
     [self maybeExecuteNextTask];
 }
@@ -46,7 +46,7 @@
 - (void)maybeExecuteNextTask {
     if (!self.isStopped && !self.isBusy) {
         if (!self.isEmpty) {
-            VIOSTaskClosure firstTask = [self.taskQueue firstObject];
+            BMATaskClosure firstTask = [self.taskQueue firstObject];
             [self.taskQueue removeObjectAtIndex:0];
             
             self.isBusy = YES;

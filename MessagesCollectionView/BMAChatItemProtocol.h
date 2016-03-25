@@ -1,16 +1,16 @@
 //
-//  VIOSChatItemProtocol.h
+//  BMAChatItemProtocol.h
 //  MessagesCollectionView
 //
 //  Created by Aziz Latypov on 23/03/16.
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "VIOSUniqueIdentificable.h"
+#import "BMAUniqueIdentificable.h"
 
 #import <UIKit/UIKit.h>
 
-@protocol VIOSChatItemProtocol <NSObject, VIOSUniqueIdentificable>
+@protocol BMAChatItemProtocol <NSObject, BMAUniqueIdentificable>
 @property (nonatomic, readonly) NSString *type;
 @end
 
@@ -19,15 +19,15 @@
 @property (nonatomic, readonly) CGFloat bottomMargin;
 @end
 
-@protocol VIOSDecoratedChatItem
-@property (nonatomic, readonly) id<VIOSChatItemProtocol> chatItem;
+@protocol BMADecoratedChatItem
+@property (nonatomic, readonly) id<BMAChatItemProtocol> chatItem;
 @property (nonatomic, readonly) id<ChatItemDecorationAttributesProtocol> decorationAttributes;
 @end
 
-@interface VIOSDecorateChatItemObject : NSObject <VIOSDecoratedChatItem>
-@property (nonatomic, strong) id<VIOSChatItemProtocol> chatItem;
+@interface BMADecoratedChatItemObject : NSObject <BMADecoratedChatItem>
+@property (nonatomic, strong) id<BMAChatItemProtocol> chatItem;
 @property (nonatomic, strong) id<ChatItemDecorationAttributesProtocol> decorationAttributes;
-- (instancetype)initWithChatItem:(id<VIOSChatItemProtocol>)chatItem
+- (instancetype)initWithChatItem:(id<BMAChatItemProtocol>)chatItem
                       attributes:(id<ChatItemDecorationAttributesProtocol>)attributes;
 @end
 
@@ -50,7 +50,7 @@
 @end
 
 @protocol ChatItemPresenterBuilderProtocol
-- (BOOL)canHandleChatItem:(id<VIOSChatItemProtocol>)chatItem;
-- (id<ChatItemPresenterProtocol>)createPresenterWithChatItem:(id<VIOSChatItemProtocol>)chatItem;
+- (BOOL)canHandleChatItem:(id<BMAChatItemProtocol>)chatItem;
+- (id<ChatItemPresenterProtocol>)createPresenterWithChatItem:(id<BMAChatItemProtocol>)chatItem;
 - (NSString*)presenterType;
 @end

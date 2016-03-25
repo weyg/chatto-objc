@@ -13,7 +13,7 @@ typedef enum : NSUInteger {
     InsertPositionBottom,
 } InsertPositionType;
 
-@interface SlidingDataSource : NSObject
+@interface BMASlidingDataSource : NSObject
 
 @property (assign, nonatomic) NSInteger pageSize;
 @property (assign, nonatomic) NSInteger windowOffset;
@@ -27,7 +27,7 @@ typedef enum : NSUInteger {
 - (void)insertItem:(id)item position:(InsertPositionType)position;
 - (BOOL)hasPrevious;
 - (BOOL)hasMore;
-- (void)loadPrevios;
+- (void)loadPreBMA;
 - (void)loadNext;
 - (void)clean;
 - (BOOL)adjustWindowWithFocusPosition:(double)focusPosition maxWindowSize:(NSInteger)maxWindowSize;

@@ -5,15 +5,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--iOS Chat View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="WWq-EF-EwE">
             <objects>
-                <collectionViewController id="ps7-9s-Ikm" customClass="VIOSChatViewController" sceneMemberID="viewController">
+                <collectionViewController id="ps7-9s-Ikm" customClass="BMAChatViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="lCV-mL-uoR">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <collectionViewLayout key="collectionViewLayout" id="xZh-d4-gCf" customClass="VIOSChatCollectionViewLayout"/>
+                        <collectionViewLayout key="collectionViewLayout" id="xZh-d4-gCf" customClass="BMAChatCollectionViewLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="KrZ-8k-hjh">
                                 <rect key="frame" x="0.0" y="0.0" width="170" height="96"/>

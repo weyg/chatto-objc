@@ -13,22 +13,20 @@
 		3E2483261C9ACF0500C167EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E2483241C9ACF0500C167EA /* Main.storyboard */; };
 		3E2483281C9ACF0500C167EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E2483271C9ACF0500C167EA /* Assets.xcassets */; };
 		3E24832B1C9ACF0500C167EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E2483291C9ACF0500C167EA /* LaunchScreen.storyboard */; };
-		3E2483441C9ACF2F00C167EA /* VIOSChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2483411C9ACF2F00C167EA /* VIOSChatViewController.m */; };
-		3E2483451C9ACF2F00C167EA /* VIOSChatCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2483431C9ACF2F00C167EA /* VIOSChatCollectionViewLayout.m */; };
-		3E24834B1C9ACF9800C167EA /* VIOSChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E24834A1C9ACF9800C167EA /* VIOSChatCell.m */; };
-		3E24835F1C9AD0D600C167EA /* VIOSChatMessageEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E24835D1C9AD0D600C167EA /* VIOSChatMessageEntity.mm */; };
+		3E2483441C9ACF2F00C167EA /* BMAChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2483411C9ACF2F00C167EA /* BMAChatViewController.m */; };
+		3E2483451C9ACF2F00C167EA /* BMAChatCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2483431C9ACF2F00C167EA /* BMAChatCollectionViewLayout.m */; };
 		3E2483681C9C0FAE00C167EA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 3E2483671C9C0FAE00C167EA /* Podfile */; };
 		3E24836A1C9C155C00C167EA /* VIOSLayoutMakerSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2483691C9C155C00C167EA /* VIOSLayoutMakerSpecs.m */; };
-		3E5C60381CA0457F0016B16B /* VIOSChatViewController+Scrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5C60371CA0457F0016B16B /* VIOSChatViewController+Scrolling.m */; };
-		3E5C603B1CA04CCD0016B16B /* VIOSChatCollectionViewLayoutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5C603A1CA04CCD0016B16B /* VIOSChatCollectionViewLayoutModel.m */; };
+		3E5C60381CA0457F0016B16B /* BMAChatViewController+Scrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5C60371CA0457F0016B16B /* BMAChatViewController+Scrolling.m */; };
+		3E5C603B1CA04CCD0016B16B /* BMAChatCollectionViewLayoutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5C603A1CA04CCD0016B16B /* BMAChatCollectionViewLayoutModel.m */; };
 		3E7735A21CA29C1900FF0644 /* NSArray+BlockKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735A11CA29C1900FF0644 /* NSArray+BlockKit.m */; };
-		3E7735A61CA2AE1A00FF0644 /* VIOSChatViewController+Changes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735A51CA2AE1A00FF0644 /* VIOSChatViewController+Changes.m */; };
-		3E7735AC1CA2D51300FF0644 /* VIOSSerialQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735AB1CA2D51300FF0644 /* VIOSSerialQueue.m */; };
-		3E7735AF1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735AE1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.m */; };
+		3E7735A61CA2AE1A00FF0644 /* BMAChatViewController+Changes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735A51CA2AE1A00FF0644 /* BMAChatViewController+Changes.m */; };
+		3E7735AC1CA2D51300FF0644 /* BMASerialQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735AB1CA2D51300FF0644 /* BMASerialQueue.m */; };
+		3E7735AF1CA2E0A600FF0644 /* BMAChatViewController+Presenters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735AE1CA2E0A600FF0644 /* BMAChatViewController+Presenters.m */; };
 		3E7735B21CA2F4EC00FF0644 /* NSSet+BlockKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735B11CA2F4EC00FF0644 /* NSSet+BlockKit.m */; };
-		3E7735B51CA528DC00FF0644 /* SlidingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735B41CA528DC00FF0644 /* SlidingDataSource.m */; };
-		8F92B60B1CA45450001DAAC5 /* FakeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F92B60A1CA45450001DAAC5 /* FakeDataSource.m */; };
-		8FC7321B1CA3F21B009D0B61 /* CollectionChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC7321A1CA3F21B009D0B61 /* CollectionChanges.m */; };
+		3E7735B51CA528DC00FF0644 /* BMASlidingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735B41CA528DC00FF0644 /* BMASlidingDataSource.m */; };
+		8F92B60B1CA45450001DAAC5 /* BMAFakeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F92B60A1CA45450001DAAC5 /* BMAFakeDataSource.m */; };
+		8FC7321B1CA3F21B009D0B61 /* BMACollectionChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC7321A1CA3F21B009D0B61 /* BMACollectionChanges.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,49 +52,36 @@
 		3E24832C1C9ACF0500C167EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E2483311C9ACF0500C167EA /* MessagesCollectionViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MessagesCollectionViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E2483371C9ACF0500C167EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E2483401C9ACF2F00C167EA /* VIOSChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatViewController.h; sourceTree = "<group>"; };
-		3E2483411C9ACF2F00C167EA /* VIOSChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIOSChatViewController.m; sourceTree = "<group>"; };
-		3E2483421C9ACF2F00C167EA /* VIOSChatCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatCollectionViewLayout.h; sourceTree = "<group>"; };
-		3E2483431C9ACF2F00C167EA /* VIOSChatCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIOSChatCollectionViewLayout.m; sourceTree = "<group>"; };
-		3E2483491C9ACF9800C167EA /* VIOSChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatCell.h; sourceTree = "<group>"; };
-		3E24834A1C9ACF9800C167EA /* VIOSChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIOSChatCell.m; sourceTree = "<group>"; };
-		3E2483541C9AD0D600C167EA /* VIOSChatCellCallActionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatCellCallActionType.h; sourceTree = "<group>"; };
-		3E2483551C9AD0D600C167EA /* VIOSChatCellFileTransferActionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatCellFileTransferActionType.h; sourceTree = "<group>"; };
-		3E2483561C9AD0D600C167EA /* VIOSChatCellForumInvitationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatCellForumInvitationType.h; sourceTree = "<group>"; };
-		3E2483571C9AD0D600C167EA /* VIOSChatMessageAskAnswerType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatMessageAskAnswerType.h; sourceTree = "<group>"; };
-		3E2483581C9AD0D600C167EA /* VIOSChatMessageAuthType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatMessageAuthType.h; sourceTree = "<group>"; };
-		3E2483591C9AD0D600C167EA /* VIOSChatMessageCallActionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatMessageCallActionType.h; sourceTree = "<group>"; };
-		3E24835A1C9AD0D600C167EA /* VIOSChatMessageCallType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatMessageCallType.h; sourceTree = "<group>"; };
-		3E24835B1C9AD0D600C167EA /* VIOSChatMessageDirectionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatMessageDirectionType.h; sourceTree = "<group>"; };
-		3E24835C1C9AD0D600C167EA /* VIOSChatMessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatMessageEntity.h; sourceTree = "<group>"; };
-		3E24835D1C9AD0D600C167EA /* VIOSChatMessageEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VIOSChatMessageEntity.mm; sourceTree = "<group>"; };
-		3E24835E1C9AD0D600C167EA /* VIOSChatMessageTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatMessageTypes.h; sourceTree = "<group>"; };
+		3E2483401C9ACF2F00C167EA /* BMAChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAChatViewController.h; sourceTree = "<group>"; };
+		3E2483411C9ACF2F00C167EA /* BMAChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAChatViewController.m; sourceTree = "<group>"; };
+		3E2483421C9ACF2F00C167EA /* BMAChatCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAChatCollectionViewLayout.h; sourceTree = "<group>"; };
+		3E2483431C9ACF2F00C167EA /* BMAChatCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAChatCollectionViewLayout.m; sourceTree = "<group>"; };
 		3E2483671C9C0FAE00C167EA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		3E2483691C9C155C00C167EA /* VIOSLayoutMakerSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIOSLayoutMakerSpecs.m; sourceTree = "<group>"; };
-		3E5C60361CA0457F0016B16B /* VIOSChatViewController+Scrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VIOSChatViewController+Scrolling.h"; sourceTree = "<group>"; };
-		3E5C60371CA0457F0016B16B /* VIOSChatViewController+Scrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VIOSChatViewController+Scrolling.m"; sourceTree = "<group>"; };
-		3E5C60391CA04CCD0016B16B /* VIOSChatCollectionViewLayoutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSChatCollectionViewLayoutModel.h; sourceTree = "<group>"; };
-		3E5C603A1CA04CCD0016B16B /* VIOSChatCollectionViewLayoutModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIOSChatCollectionViewLayoutModel.m; sourceTree = "<group>"; };
+		3E5C60361CA0457F0016B16B /* BMAChatViewController+Scrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BMAChatViewController+Scrolling.h"; sourceTree = "<group>"; };
+		3E5C60371CA0457F0016B16B /* BMAChatViewController+Scrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BMAChatViewController+Scrolling.m"; sourceTree = "<group>"; };
+		3E5C60391CA04CCD0016B16B /* BMAChatCollectionViewLayoutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAChatCollectionViewLayoutModel.h; sourceTree = "<group>"; };
+		3E5C603A1CA04CCD0016B16B /* BMAChatCollectionViewLayoutModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAChatCollectionViewLayoutModel.m; sourceTree = "<group>"; };
 		3E7735A01CA29C1900FF0644 /* NSArray+BlockKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BlockKit.h"; sourceTree = "<group>"; };
 		3E7735A11CA29C1900FF0644 /* NSArray+BlockKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BlockKit.m"; sourceTree = "<group>"; };
-		3E7735A31CA2ABFD00FF0644 /* VIOSChatUpdateType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VIOSChatUpdateType.h; sourceTree = "<group>"; };
-		3E7735A41CA2AE1900FF0644 /* VIOSChatViewController+Changes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VIOSChatViewController+Changes.h"; sourceTree = "<group>"; };
-		3E7735A51CA2AE1A00FF0644 /* VIOSChatViewController+Changes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VIOSChatViewController+Changes.m"; sourceTree = "<group>"; };
-		3E7735A71CA2AE9C00FF0644 /* VIOSChatDataSourceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VIOSChatDataSourceProtocol.h; sourceTree = "<group>"; };
-		3E7735A81CA2B06100FF0644 /* VIOSUniqueIdentificable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VIOSUniqueIdentificable.h; sourceTree = "<group>"; };
-		3E7735A91CA2B08800FF0644 /* VIOSChatItemProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VIOSChatItemProtocol.h; sourceTree = "<group>"; };
-		3E7735AA1CA2D51300FF0644 /* VIOSSerialQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIOSSerialQueue.h; sourceTree = "<group>"; };
-		3E7735AB1CA2D51300FF0644 /* VIOSSerialQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIOSSerialQueue.m; sourceTree = "<group>"; };
-		3E7735AD1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VIOSChatViewController+Presenters.h"; sourceTree = "<group>"; };
-		3E7735AE1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VIOSChatViewController+Presenters.m"; sourceTree = "<group>"; };
+		3E7735A31CA2ABFD00FF0644 /* BMAChatUpdateType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMAChatUpdateType.h; sourceTree = "<group>"; };
+		3E7735A41CA2AE1900FF0644 /* BMAChatViewController+Changes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BMAChatViewController+Changes.h"; sourceTree = "<group>"; };
+		3E7735A51CA2AE1A00FF0644 /* BMAChatViewController+Changes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BMAChatViewController+Changes.m"; sourceTree = "<group>"; };
+		3E7735A71CA2AE9C00FF0644 /* BMAChatDataSourceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMAChatDataSourceProtocol.h; sourceTree = "<group>"; };
+		3E7735A81CA2B06100FF0644 /* BMAUniqueIdentificable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMAUniqueIdentificable.h; sourceTree = "<group>"; };
+		3E7735A91CA2B08800FF0644 /* BMAChatItemProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMAChatItemProtocol.h; sourceTree = "<group>"; };
+		3E7735AA1CA2D51300FF0644 /* BMASerialQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMASerialQueue.h; sourceTree = "<group>"; };
+		3E7735AB1CA2D51300FF0644 /* BMASerialQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMASerialQueue.m; sourceTree = "<group>"; };
+		3E7735AD1CA2E0A600FF0644 /* BMAChatViewController+Presenters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BMAChatViewController+Presenters.h"; sourceTree = "<group>"; };
+		3E7735AE1CA2E0A600FF0644 /* BMAChatViewController+Presenters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BMAChatViewController+Presenters.m"; sourceTree = "<group>"; };
 		3E7735B01CA2F4EC00FF0644 /* NSSet+BlockKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+BlockKit.h"; sourceTree = "<group>"; };
 		3E7735B11CA2F4EC00FF0644 /* NSSet+BlockKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+BlockKit.m"; sourceTree = "<group>"; };
-		3E7735B31CA528DC00FF0644 /* SlidingDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingDataSource.h; sourceTree = "<group>"; };
-		3E7735B41CA528DC00FF0644 /* SlidingDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingDataSource.m; sourceTree = "<group>"; };
-		8F92B6091CA45450001DAAC5 /* FakeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeDataSource.h; sourceTree = "<group>"; };
-		8F92B60A1CA45450001DAAC5 /* FakeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeDataSource.m; sourceTree = "<group>"; };
-		8FC732191CA3F21B009D0B61 /* CollectionChanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionChanges.h; sourceTree = "<group>"; };
-		8FC7321A1CA3F21B009D0B61 /* CollectionChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionChanges.m; sourceTree = "<group>"; };
+		3E7735B31CA528DC00FF0644 /* BMASlidingDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMASlidingDataSource.h; sourceTree = "<group>"; };
+		3E7735B41CA528DC00FF0644 /* BMASlidingDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMASlidingDataSource.m; sourceTree = "<group>"; };
+		8F92B6091CA45450001DAAC5 /* BMAFakeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAFakeDataSource.h; sourceTree = "<group>"; };
+		8F92B60A1CA45450001DAAC5 /* BMAFakeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAFakeDataSource.m; sourceTree = "<group>"; };
+		8FC732191CA3F21B009D0B61 /* BMACollectionChanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMACollectionChanges.h; sourceTree = "<group>"; };
+		8FC7321A1CA3F21B009D0B61 /* BMACollectionChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMACollectionChanges.m; sourceTree = "<group>"; };
 		B8743E43CE2E842D10D30576 /* Pods-MessagesCollectionViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesCollectionViewTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesCollectionViewTests/Pods-MessagesCollectionViewTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,37 +131,34 @@
 				3E24831E1C9ACF0400C167EA /* AppDelegate.h */,
 				3E24831F1C9ACF0400C167EA /* AppDelegate.m */,
 				3E2483241C9ACF0500C167EA /* Main.storyboard */,
-				3E7735A81CA2B06100FF0644 /* VIOSUniqueIdentificable.h */,
-				3E7735A91CA2B08800FF0644 /* VIOSChatItemProtocol.h */,
-				3E7735A71CA2AE9C00FF0644 /* VIOSChatDataSourceProtocol.h */,
-				8F92B6091CA45450001DAAC5 /* FakeDataSource.h */,
-				8F92B60A1CA45450001DAAC5 /* FakeDataSource.m */,
-				3E7735B31CA528DC00FF0644 /* SlidingDataSource.h */,
-				3E7735B41CA528DC00FF0644 /* SlidingDataSource.m */,
-				8FC732191CA3F21B009D0B61 /* CollectionChanges.h */,
-				8FC7321A1CA3F21B009D0B61 /* CollectionChanges.m */,
-				3E2483401C9ACF2F00C167EA /* VIOSChatViewController.h */,
-				3E2483411C9ACF2F00C167EA /* VIOSChatViewController.m */,
-				3E5C60361CA0457F0016B16B /* VIOSChatViewController+Scrolling.h */,
-				3E5C60371CA0457F0016B16B /* VIOSChatViewController+Scrolling.m */,
-				3E7735A41CA2AE1900FF0644 /* VIOSChatViewController+Changes.h */,
-				3E7735A51CA2AE1A00FF0644 /* VIOSChatViewController+Changes.m */,
-				3E7735AD1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.h */,
-				3E7735AE1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.m */,
-				3E5C60391CA04CCD0016B16B /* VIOSChatCollectionViewLayoutModel.h */,
-				3E5C603A1CA04CCD0016B16B /* VIOSChatCollectionViewLayoutModel.m */,
-				3E2483421C9ACF2F00C167EA /* VIOSChatCollectionViewLayout.h */,
-				3E2483431C9ACF2F00C167EA /* VIOSChatCollectionViewLayout.m */,
-				3E7735A31CA2ABFD00FF0644 /* VIOSChatUpdateType.h */,
+				3E7735A81CA2B06100FF0644 /* BMAUniqueIdentificable.h */,
+				3E7735A91CA2B08800FF0644 /* BMAChatItemProtocol.h */,
+				3E7735A71CA2AE9C00FF0644 /* BMAChatDataSourceProtocol.h */,
+				8F92B6091CA45450001DAAC5 /* BMAFakeDataSource.h */,
+				8F92B60A1CA45450001DAAC5 /* BMAFakeDataSource.m */,
+				3E7735B31CA528DC00FF0644 /* BMASlidingDataSource.h */,
+				3E7735B41CA528DC00FF0644 /* BMASlidingDataSource.m */,
+				8FC732191CA3F21B009D0B61 /* BMACollectionChanges.h */,
+				8FC7321A1CA3F21B009D0B61 /* BMACollectionChanges.m */,
+				3E7735A31CA2ABFD00FF0644 /* BMAChatUpdateType.h */,
+				3E2483401C9ACF2F00C167EA /* BMAChatViewController.h */,
+				3E2483411C9ACF2F00C167EA /* BMAChatViewController.m */,
+				3E5C60361CA0457F0016B16B /* BMAChatViewController+Scrolling.h */,
+				3E5C60371CA0457F0016B16B /* BMAChatViewController+Scrolling.m */,
+				3E7735A41CA2AE1900FF0644 /* BMAChatViewController+Changes.h */,
+				3E7735A51CA2AE1A00FF0644 /* BMAChatViewController+Changes.m */,
+				3E7735AD1CA2E0A600FF0644 /* BMAChatViewController+Presenters.h */,
+				3E7735AE1CA2E0A600FF0644 /* BMAChatViewController+Presenters.m */,
+				3E5C60391CA04CCD0016B16B /* BMAChatCollectionViewLayoutModel.h */,
+				3E5C603A1CA04CCD0016B16B /* BMAChatCollectionViewLayoutModel.m */,
+				3E2483421C9ACF2F00C167EA /* BMAChatCollectionViewLayout.h */,
+				3E2483431C9ACF2F00C167EA /* BMAChatCollectionViewLayout.m */,
 				3E7735A01CA29C1900FF0644 /* NSArray+BlockKit.h */,
 				3E7735A11CA29C1900FF0644 /* NSArray+BlockKit.m */,
 				3E7735B01CA2F4EC00FF0644 /* NSSet+BlockKit.h */,
 				3E7735B11CA2F4EC00FF0644 /* NSSet+BlockKit.m */,
-				3E7735AA1CA2D51300FF0644 /* VIOSSerialQueue.h */,
-				3E7735AB1CA2D51300FF0644 /* VIOSSerialQueue.m */,
-				3E2483491C9ACF9800C167EA /* VIOSChatCell.h */,
-				3E24834A1C9ACF9800C167EA /* VIOSChatCell.m */,
-				3E2483521C9AD0D600C167EA /* Entities */,
+				3E7735AA1CA2D51300FF0644 /* BMASerialQueue.h */,
+				3E7735AB1CA2D51300FF0644 /* BMASerialQueue.m */,
 				3E2483271C9ACF0500C167EA /* Assets.xcassets */,
 				3E2483291C9ACF0500C167EA /* LaunchScreen.storyboard */,
 				3E24832C1C9ACF0500C167EA /* Info.plist */,
@@ -200,32 +182,6 @@
 				3E2483371C9ACF0500C167EA /* Info.plist */,
 			);
 			path = MessagesCollectionViewTests;
-			sourceTree = "<group>";
-		};
-		3E2483521C9AD0D600C167EA /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				3E2483531C9AD0D600C167EA /* Message */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		3E2483531C9AD0D600C167EA /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				3E2483541C9AD0D600C167EA /* VIOSChatCellCallActionType.h */,
-				3E2483551C9AD0D600C167EA /* VIOSChatCellFileTransferActionType.h */,
-				3E2483561C9AD0D600C167EA /* VIOSChatCellForumInvitationType.h */,
-				3E2483571C9AD0D600C167EA /* VIOSChatMessageAskAnswerType.h */,
-				3E2483581C9AD0D600C167EA /* VIOSChatMessageAuthType.h */,
-				3E2483591C9AD0D600C167EA /* VIOSChatMessageCallActionType.h */,
-				3E24835A1C9AD0D600C167EA /* VIOSChatMessageCallType.h */,
-				3E24835B1C9AD0D600C167EA /* VIOSChatMessageDirectionType.h */,
-				3E24835C1C9AD0D600C167EA /* VIOSChatMessageEntity.h */,
-				3E24835D1C9AD0D600C167EA /* VIOSChatMessageEntity.mm */,
-				3E24835E1C9AD0D600C167EA /* VIOSChatMessageTypes.h */,
-			);
-			path = Message;
 			sourceTree = "<group>";
 		};
 		9E62AF2EE7032BB0DB7590E0 /* Pods */ = {
@@ -397,22 +353,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E7735A61CA2AE1A00FF0644 /* VIOSChatViewController+Changes.m in Sources */,
+				3E7735A61CA2AE1A00FF0644 /* BMAChatViewController+Changes.m in Sources */,
 				3E7735A21CA29C1900FF0644 /* NSArray+BlockKit.m in Sources */,
-				8F92B60B1CA45450001DAAC5 /* FakeDataSource.m in Sources */,
-				3E24835F1C9AD0D600C167EA /* VIOSChatMessageEntity.mm in Sources */,
-				3E2483441C9ACF2F00C167EA /* VIOSChatViewController.m in Sources */,
-				3E7735AF1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.m in Sources */,
-				3E24834B1C9ACF9800C167EA /* VIOSChatCell.m in Sources */,
-				3E2483451C9ACF2F00C167EA /* VIOSChatCollectionViewLayout.m in Sources */,
+				8F92B60B1CA45450001DAAC5 /* BMAFakeDataSource.m in Sources */,
+				3E2483441C9ACF2F00C167EA /* BMAChatViewController.m in Sources */,
+				3E7735AF1CA2E0A600FF0644 /* BMAChatViewController+Presenters.m in Sources */,
+				3E2483451C9ACF2F00C167EA /* BMAChatCollectionViewLayout.m in Sources */,
 				3E2483201C9ACF0400C167EA /* AppDelegate.m in Sources */,
 				3E24831D1C9ACF0400C167EA /* main.m in Sources */,
-				3E7735B51CA528DC00FF0644 /* SlidingDataSource.m in Sources */,
-				3E7735AC1CA2D51300FF0644 /* VIOSSerialQueue.m in Sources */,
-				8FC7321B1CA3F21B009D0B61 /* CollectionChanges.m in Sources */,
+				3E7735B51CA528DC00FF0644 /* BMASlidingDataSource.m in Sources */,
+				3E7735AC1CA2D51300FF0644 /* BMASerialQueue.m in Sources */,
+				8FC7321B1CA3F21B009D0B61 /* BMACollectionChanges.m in Sources */,
 				3E7735B21CA2F4EC00FF0644 /* NSSet+BlockKit.m in Sources */,
-				3E5C60381CA0457F0016B16B /* VIOSChatViewController+Scrolling.m in Sources */,
-				3E5C603B1CA04CCD0016B16B /* VIOSChatCollectionViewLayoutModel.m in Sources */,
+				3E5C60381CA0457F0016B16B /* BMAChatViewController+Scrolling.m in Sources */,
+				3E5C603B1CA04CCD0016B16B /* BMAChatCollectionViewLayoutModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

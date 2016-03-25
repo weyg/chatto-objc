@@ -6,9 +6,9 @@
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "SlidingDataSource.h"
+#import "BMASlidingDataSource.h"
 
-@implementation SlidingDataSource
+@implementation BMASlidingDataSource
 - (instancetype)initWithItems:(NSArray *)items pageSize:(NSInteger)pageSize
 {
     self = [super init];
@@ -62,7 +62,7 @@
     return self.windowOffset + self.windowCount < self.itemsOffset + self.items.count;
 }
 
-- (void)loadPrevios {
+- (void)loadPreBMA {
     NSInteger previousWindowOffset = self.windowOffset;
     NSInteger previousWindowCount = self.windowCount;
     NSInteger nextWindowOffset = MAX(0, self.windowOffset - self.pageSize);

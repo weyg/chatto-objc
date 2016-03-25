@@ -1,22 +1,22 @@
 //
-//  VIOSMessagesCollectionViewController.m
+//  BMAMessagesCollectionViewController.m
 //  vipole
 //
 //  Created by Aziz Latypov on 17/03/16.
 //  Copyright © 2016 vipole. All rights reserved.
 //
 
-#import "VIOSChatViewController.h"
+#import "BMAChatViewController.h"
 
-#import "VIOSChatCollectionViewLayout.h"
+#import "BMAChatCollectionViewLayout.h"
 
-#import "VIOSSerialQueue.h"
+#import "BMASerialQueue.h"
 
-#import "VIOSChatViewController+Changes.h"
+#import "BMAChatViewController+Changes.h"
 
-#import "FakeDataSource.h"
+#import "BMAFakeDataSource.h"
 
-@implementation VIOSChatViewController
+@implementation BMAChatViewController
 
 - (CGRect)rectAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath) {
@@ -28,10 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.updateQueue = [VIOSSerialQueue new];
+    self.updateQueue = [BMASerialQueue new];
     
     self.decoratedChatItems = @[];
-    self.layoutModel = [VIOSChatCollectionViewLayoutModel createModelForCollectionViewWidth:0 itemsLayoutData:@[]];
+    self.layoutModel = [BMAChatCollectionViewLayoutModel createModelForCollectionViewWidth:0 itemsLayoutData:@[]];
     
     self.presenters = [NSMutableArray new];
     self.presentersByChatItem =
@@ -40,9 +40,9 @@
     [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsWeakMemory valueOptions:NSPointerFunctionsWeakMemory capacity:0];
     
     self.collectionView.alwaysBounceVertical = YES;
-    [(VIOSChatCollectionViewLayout*)self.collectionView.collectionViewLayout setDelegate:self];
+    [(BMAChatCollectionViewLayout*)self.collectionView.collectionViewLayout setDelegate:self];
     
-    FakeDataSource *dataSource = [FakeDataSource new];
+    BMAFakeDataSource *dataSource = [BMAFakeDataSource new];
     self.chatDataSource = dataSource;
     
     [NSTimer scheduledTimerWithTimeInterval:1.5 target:dataSource selector:@selector(prependChatItems) userInfo:nil repeats:YES];
@@ -58,11 +58,11 @@
 //    [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.contentSize.height)];
 }
 
-- (void)setChatDataSource:(id<VIOSChatDataSourceProtocol>)chatDataSource {
+- (void)setChatDataSource:(id<BMAChatDataSourceProtocol>)chatDataSource {
     _chatDataSource = chatDataSource;
     
     _chatDataSource.delegate = self;
-    [self enqueueModelUpdate:VIOSChatUpdateReload];
+    [self enqueueModelUpdate:BMAChatUpdateReload];
 }
 
 @end

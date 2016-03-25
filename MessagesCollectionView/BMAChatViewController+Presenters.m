@@ -1,16 +1,16 @@
 //
-//  VIOSChatViewController+Presenters.m
+//  BMAChatViewController+Presenters.m
 //  MessagesCollectionView
 //
 //  Created by Aziz Latypov on 23/03/16.
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "VIOSChatViewController+Presenters.h"
+#import "BMAChatViewController+Presenters.h"
 
-@interface VIOSChatItemCellPresenterObject : NSObject <ChatItemPresenterProtocol>
+@interface BMAChatItemCellPresenterObject : NSObject <ChatItemPresenterProtocol>
 @end
-@implementation VIOSChatItemCellPresenterObject
+@implementation BMAChatItemCellPresenterObject
 
 + (void)registerCels:(UICollectionView*)collectionView {
 }
@@ -30,7 +30,7 @@
 
 @end
 
-@implementation VIOSChatViewController (Presenters)
+@implementation BMAChatViewController (Presenters)
 //public func presenterForIndex(index: Int, decoratedChatItems: [DecoratedChatItem]) -> ChatItemPresenterProtocol {
 //    guard index < decoratedChatItems.count else {
 //        // This can happen from didEndDisplayingCell if we reloaded with less messages
@@ -64,10 +64,10 @@
 }
 
 - (id<ChatItemPresenterProtocol>)presenterForIndex:(NSInteger)index
-                                decoratedChatItems:(NSArray<id<VIOSDecoratedChatItem>>*)decoratedChatItems
+                                decoratedChatItems:(NSArray<id<BMADecoratedChatItem>>*)decoratedChatItems
 {
     if (index < decoratedChatItems.count) {
-        return [VIOSChatItemCellPresenterObject new];
+        return [BMAChatItemCellPresenterObject new];
     }
     
     id item = self.decoratedChatItems[index];
@@ -76,7 +76,7 @@
         return presenter;
     }
     
-    presenter = [VIOSChatItemCellPresenterObject new];
+    presenter = [BMAChatItemCellPresenterObject new];
     [self.presentersByChatItem setObject:presenter forKey:item];
     
     return presenter;

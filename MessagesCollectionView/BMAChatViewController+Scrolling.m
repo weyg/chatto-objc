@@ -1,16 +1,16 @@
 //
-//  VIOSMessagesCollectionViewController+Scrolling.m
+//  BMAMessagesCollectionViewController+Scrolling.m
 //  MessagesCollectionView
 //
 //  Created by Aziz Latypov on 21/03/16.
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-#import "VIOSChatViewController+Scrolling.h"
+#import "BMAChatViewController+Scrolling.h"
 
-static const CGFloat VIOSAutoloadingFractionalThreshold = 0.5;
+static const CGFloat BMAAutoloadingFractionalThreshold = 0.5;
 
-@implementation VIOSChatViewController (Scrolling)
+@implementation BMAChatViewController (Scrolling)
 
 - (BOOL)isScrolledAtBottom {
     if( [self.collectionView numberOfSections] == 0 || [self.collectionView numberOfItemsInSection:0] == 0) {
@@ -20,7 +20,7 @@ static const CGFloat VIOSAutoloadingFractionalThreshold = 0.5;
     NSInteger sectionIndex = [self.collectionView numberOfSections] - 1;
     NSInteger itemIndex = [self.collectionView numberOfItemsInSection:sectionIndex] - 1;
     NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:itemIndex inSection:sectionIndex];
-    return [self isIndexPathVisible:lastIndexPath atEdge:VIOSCellVerticalEdgeBottom];
+    return [self isIndexPathVisible:lastIndexPath atEdge:BMACellVerticalEdgeBottom];
 }
 
 - (BOOL)isScrolledAtTop {
@@ -29,7 +29,7 @@ static const CGFloat VIOSAutoloadingFractionalThreshold = 0.5;
     }
     
     NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-    return [self isIndexPathVisible:firstIndexPath atEdge:VIOSCellVerticalEdgeTop];
+    return [self isIndexPathVisible:firstIndexPath atEdge:BMACellVerticalEdgeTop];
 }
 
 - (BOOL)isCloseToBottom {
@@ -37,7 +37,7 @@ static const CGFloat VIOSAutoloadingFractionalThreshold = 0.5;
         return YES;
     }
 
-    return CGRectGetMaxY([self visibleRect]) / self.collectionView.contentSize.height > (1 - VIOSAutoloadingFractionalThreshold);
+    return CGRectGetMaxY([self visibleRect]) / self.collectionView.contentSize.height > (1 - BMAAutoloadingFractionalThreshold);
 }
 
 - (BOOL)isCloseToTop {
@@ -45,15 +45,15 @@ static const CGFloat VIOSAutoloadingFractionalThreshold = 0.5;
         return YES;
     }
     
-    return CGRectGetMinY([self visibleRect]) / self.collectionView.contentSize.height < (1 - VIOSAutoloadingFractionalThreshold);
+    return CGRectGetMinY([self visibleRect]) / self.collectionView.contentSize.height < (1 - BMAAutoloadingFractionalThreshold);
 }
 
-- (BOOL)isIndexPathVisible:(NSIndexPath*)indexPath atEdge:(VIOSCellVerticalEdge)edge {
+- (BOOL)isIndexPathVisible:(NSIndexPath*)indexPath atEdge:(BMACellVerticalEdge)edge {
     UICollectionViewLayoutAttributes *attributes = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath];
     if (attributes) {
         CGRect visibleRect = [self visibleRect];
         CGRect intersection = CGRectIntersection(visibleRect, attributes.frame);
-        if (edge == VIOSCellVerticalEdgeTop) {
+        if (edge == BMACellVerticalEdgeTop) {
             return CGRectGetMinY(intersection) == CGRectGetMinY(attributes.frame);
         } else {
             return CGRectGetMaxY(intersection) == CGRectGetMaxY(attributes.frame);
