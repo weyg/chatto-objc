@@ -30,7 +30,7 @@ static double updatesAnimationDuration = 0.35;
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat topMargin;
 @property (nonatomic, assign) CGFloat bottomMargin;
-@property (nonnull, strong) NSArray <id<BMAItemLayoutData>> *items;
+@property (nonatomic, strong) NSArray <id<BMAItemLayoutData>> *items;
 - (instancetype)initWithHeight:(CGFloat)height topMargin:(CGFloat)topMargin bottomMargin:(CGFloat)bottomMargin items:(NSArray <id<BMAItemLayoutData>> *)items;
 @end
 @implementation IntermediateItemLayoutData

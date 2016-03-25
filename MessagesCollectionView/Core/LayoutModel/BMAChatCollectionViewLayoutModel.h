@@ -14,7 +14,7 @@
 @protocol BMAItemLayoutData
 @property (nonatomic, readonly) CGFloat height;
 @property (nonatomic, readonly) CGFloat bottomMargin;
-@property (nonnull, readonly) NSArray <id<BMAItemLayoutData>> *items;
+@property (nonatomic, readonly) NSArray <id<BMAItemLayoutData>> *items;
 @end
 
 @interface BMAChatCollectionViewLayoutModel : NSObject
