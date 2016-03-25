@@ -206,10 +206,9 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     if (context == VIOSChatUpdateNormal) {
         [UIView animateWithDuration:updatesAnimationDuration animations:^{
             [self.collectionView performBatchUpdates:^{
-            // We want to update visible cells to support easy removal of bubble tail or any other updates that may be needed after a data update
-            // Collection view state is not constistent after performBatchUpdates. It can happen that we ask a cell for an index path and we still get the old one.
-            // Visible cells can be either updated in completion block (easier but with delay) or before, taking into account if some cell is gonna be moved
-
+                // We want to update visible cells to support easy removal of bubble tail or any other updates that may be needed after a data update
+                // Collection view state is not constistent after performBatchUpdates. It can happen that we ask a cell for an index path and we still get the old one.
+                // Visible cells can be either updated in completion block (easier but with delay) or before, taking into account if some cell is gonna be moved
                 updateModelClosure();
                 [self updateVisibleCells:changes];
                 
@@ -219,7 +218,6 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
                 for (id<CollectionChangeMove> move in [changes movedIndexPaths]) {
                     [self.collectionView moveItemAtIndexPath:[move indexPathOld] toIndexPath:[move indexPathNew]];
                 }
-
             } completion:^(BOOL finished) {
                 myCompletion();
             }];

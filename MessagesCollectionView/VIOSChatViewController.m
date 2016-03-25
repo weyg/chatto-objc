@@ -45,7 +45,9 @@
     FakeDataSource *dataSource = [FakeDataSource new];
     self.chatDataSource = dataSource;
     
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:dataSource selector:@selector(addChatItem) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:1.5 target:dataSource selector:@selector(prependChatItems) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:dataSource selector:@selector(appendChatItem) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:2.5 target:dataSource selector:@selector(clean) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated

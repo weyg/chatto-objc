@@ -30,6 +30,7 @@
 		3E7735AC1CA2D51300FF0644 /* VIOSSerialQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735AB1CA2D51300FF0644 /* VIOSSerialQueue.m */; };
 		3E7735AF1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735AE1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.m */; };
 		3E7735B21CA2F4EC00FF0644 /* NSSet+BlockKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735B11CA2F4EC00FF0644 /* NSSet+BlockKit.m */; };
+		3E7735B51CA528DC00FF0644 /* SlidingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735B41CA528DC00FF0644 /* SlidingDataSource.m */; };
 		8F92B60B1CA45450001DAAC5 /* FakeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F92B60A1CA45450001DAAC5 /* FakeDataSource.m */; };
 		8FC7321B1CA3F21B009D0B61 /* CollectionChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC7321A1CA3F21B009D0B61 /* CollectionChanges.m */; };
 /* End PBXBuildFile section */
@@ -107,6 +108,8 @@
 		3E7735AE1CA2E0A600FF0644 /* VIOSChatViewController+Presenters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VIOSChatViewController+Presenters.m"; sourceTree = "<group>"; };
 		3E7735B01CA2F4EC00FF0644 /* NSSet+BlockKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+BlockKit.h"; sourceTree = "<group>"; };
 		3E7735B11CA2F4EC00FF0644 /* NSSet+BlockKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+BlockKit.m"; sourceTree = "<group>"; };
+		3E7735B31CA528DC00FF0644 /* SlidingDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingDataSource.h; sourceTree = "<group>"; };
+		3E7735B41CA528DC00FF0644 /* SlidingDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingDataSource.m; sourceTree = "<group>"; };
 		8F92B6091CA45450001DAAC5 /* FakeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeDataSource.h; sourceTree = "<group>"; };
 		8F92B60A1CA45450001DAAC5 /* FakeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeDataSource.m; sourceTree = "<group>"; };
 		8FC732191CA3F21B009D0B61 /* CollectionChanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionChanges.h; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 				3E7735A71CA2AE9C00FF0644 /* VIOSChatDataSourceProtocol.h */,
 				8F92B6091CA45450001DAAC5 /* FakeDataSource.h */,
 				8F92B60A1CA45450001DAAC5 /* FakeDataSource.m */,
+				3E7735B31CA528DC00FF0644 /* SlidingDataSource.h */,
+				3E7735B41CA528DC00FF0644 /* SlidingDataSource.m */,
 				8FC732191CA3F21B009D0B61 /* CollectionChanges.h */,
 				8FC7321A1CA3F21B009D0B61 /* CollectionChanges.m */,
 				3E2483401C9ACF2F00C167EA /* VIOSChatViewController.h */,
@@ -433,6 +438,7 @@
 				3E2483201C9ACF0400C167EA /* AppDelegate.m in Sources */,
 				3E2483631C9AE77300C167EA /* VIOSChatLayoutMaker.m in Sources */,
 				3E24831D1C9ACF0400C167EA /* main.m in Sources */,
+				3E7735B51CA528DC00FF0644 /* SlidingDataSource.m in Sources */,
 				3E24834E1C9ACFAB00C167EA /* VIOSChatPresenter.m in Sources */,
 				3E7735AC1CA2D51300FF0644 /* VIOSSerialQueue.m in Sources */,
 				3E24836E1C9C646000C167EA /* VIOSLayoutAttributesItemObject.m in Sources */,

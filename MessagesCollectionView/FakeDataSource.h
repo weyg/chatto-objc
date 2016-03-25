@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "VIOSChatDataSourceProtocol.h"
 
-@interface FakeDataSource : NSObject <VIOSChatDataSourceProtocol>
+#import "VIOSChatDataSourceProtocol.h"
+#import "SlidingDataSource.h"
+
+@interface FakeDataSource : SlidingDataSource <VIOSChatDataSourceProtocol>
 @property (weak, nonatomic) id<VIOSChatDataSourceDelegateProtocol> delegate;
-- (void)addChatItemCount:(NSInteger)count;
-- (void)addChatItem;
+- (void)prependChatItems;
+- (void)appendChatItem;
+- (void)clean;
 @end

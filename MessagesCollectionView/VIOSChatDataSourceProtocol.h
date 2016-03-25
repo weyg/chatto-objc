@@ -37,7 +37,7 @@
 @protocol VIOSChatDataSourceProtocol
 
 - (BOOL)hasMoreNext;
-- (BOOL)hasMorePrevious;
+- (BOOL)hasMorePrevios;
 @property (nonatomic, readonly) NSArray <id<VIOSChatItemProtocol>> *chatItems;
 @property (nonatomic, weak) id<VIOSChatDataSourceDelegateProtocol> delegate;
 

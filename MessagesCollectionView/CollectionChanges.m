@@ -91,12 +91,14 @@
         NSInteger newIndex = newIndexsById[newId].integerValue;
         NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:0];
         NSNumber *oldIndex = oldIndexsById[newId];
-        if (oldIndex && oldIndex.integerValue != newIndex) {
-            NSIndexPath *oldIndexPath = [NSIndexPath indexPathForItem:oldIndex.integerValue inSection:0];
-            NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:0];
-            CollectionChangeMoveItem *moveItem =
-            [[CollectionChangeMoveItem alloc] initWithIndexPathOld:oldIndexPath indexPathNew:newIndexPath];
-            [movedIndexPaths addObject:moveItem];
+        if (oldIndex) {
+            if (oldIndex.integerValue != newIndex) {
+                NSIndexPath *oldIndexPath = [NSIndexPath indexPathForItem:oldIndex.integerValue inSection:0];
+                NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:0];
+                CollectionChangeMoveItem *moveItem =
+                [[CollectionChangeMoveItem alloc] initWithIndexPathOld:oldIndexPath indexPathNew:newIndexPath];
+                [movedIndexPaths addObject:moveItem];
+            }
         } else {
             // It's new
             [insertedIndexPaths addObject:newIndexPath];
