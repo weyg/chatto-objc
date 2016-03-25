@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "VIOSChatViewInputProtocol.h"
-#import "VIOSChatViewOutputProtocol.h"
-
 #import "VIOSChatDataSourceProtocol.h"
 #import "VIOSSerialQueue.h"
 
@@ -23,9 +20,7 @@
 -(NSArray<id<VIOSDecoratedChatItem>>*)decorateItems:(NSArray<id<VIOSChatItemProtocol>>*)chatItems;
 @end
 
-@interface VIOSChatViewController : UICollectionViewController <VIOSChatViewInputProtocol>
-
-@property (nonatomic, weak) id<VIOSChatViewOutputProtocol> presenter;
+@interface VIOSChatViewController : UICollectionViewController
 
 @property (nonatomic, strong) id<VIOSChatDataSourceProtocol> chatDataSource;
 @property (nonatomic, strong) id<VIOSSerialQueueProtocol> updateQueue;

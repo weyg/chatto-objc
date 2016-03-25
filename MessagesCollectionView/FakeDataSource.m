@@ -72,9 +72,7 @@ static NSInteger preferredPageSize = 50;
 - (void)prependChatItems {
     for (NSInteger i=0; i<10; i++) {
         
-        @synchronized (self) {
-            self.lastID += 1;
-        }
+        self.lastID += 1;
         
         ChatItemObject *chatItem = [ChatItemObject new];
         chatItem.type = @"simple";
@@ -87,9 +85,8 @@ static NSInteger preferredPageSize = 50;
 }
 
 - (void)appendChatItem {
-    @synchronized (self) {
-        self.lastID += 1;
-    }
+    
+    self.lastID += 1;
     
     ChatItemObject *chatItem = [ChatItemObject new];
     chatItem.type = @"simple";
