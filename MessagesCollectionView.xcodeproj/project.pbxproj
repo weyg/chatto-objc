@@ -191,13 +191,13 @@
 		3E7735E61CA54B1F00FF0644 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				3E7736051CA54C0E00FF0644 /* Protocols */,
+				3E77360F1CA54C2F00FF0644 /* Item */,
 				3E7735E71CA54B1F00FF0644 /* ChatViewController */,
 				3E7735F11CA54B1F00FF0644 /* CollectionChanges */,
 				3E7735F41CA54B1F00FF0644 /* CollectionViewLayout */,
 				3E7735F71CA54B1F00FF0644 /* LayoutModel */,
 				3E7735FA1CA54B1F00FF0644 /* SlidingDataSource */,
-				3E7736051CA54C0E00FF0644 /* Protocols */,
-				3E77360F1CA54C2F00FF0644 /* Item */,
 			);
 			path = Core;
 			sourceTree = "<group>";
