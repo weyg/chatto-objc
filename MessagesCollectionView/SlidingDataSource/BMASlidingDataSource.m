@@ -27,7 +27,7 @@
 }
 
 - (void)generateItems:(NSInteger)messagesNeeded postion:(InsertPositionType)position {
-    assert(false && "should inherited");
+    assert(false && "should be inherited");
 }
 
 - (NSArray *)itemsInWindow {
