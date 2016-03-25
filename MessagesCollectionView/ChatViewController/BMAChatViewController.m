@@ -47,7 +47,7 @@
     
     [NSTimer scheduledTimerWithTimeInterval:1.5 target:dataSource selector:@selector(prependChatItems) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:dataSource selector:@selector(appendChatItem) userInfo:nil repeats:YES];
-//    [NSTimer scheduledTimerWithTimeInterval:2.5 target:dataSource selector:@selector(clean) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:3.5 target:dataSource selector:@selector(clean) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated

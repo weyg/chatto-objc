@@ -19,7 +19,9 @@
 #import "BMAChatViewController+Scrolling.h"
 #import "BMAChatViewController+Presenters.h"
 
-#import "CollectionChanges.h"
+#import "BMACollectionChanges.h"
+
+#import "BMADecoratedChatItemObject.h"
 
 static NSInteger preferredMaxMessageCount = 500;
 static double updatesAnimationDuration = 0.35;
@@ -44,19 +46,19 @@ static double updatesAnimationDuration = 0.35;
 }
 @end
 
-@protocol ModelChanges <NSObject>
-@property (nonatomic, readonly) id<CollectionChanges> changes;
+@protocol BMAModelChanges <NSObject>
+@property (nonatomic, readonly) id<BMACollectionChanges> changes;
 @property (nonatomic, readonly) void(^updateModelClosure)();
 @end
 
-@interface ModelChangesItem : NSObject <ModelChanges>
-@property (nonatomic, readonly) id<CollectionChanges> changes;
+@interface BMAModelChangesItem : NSObject <BMAModelChanges>
+@property (nonatomic, readonly) id<BMACollectionChanges> changes;
 @property (nonatomic, readonly) void(^updateModelClosure)();
-- (instancetype)initWithChanges:(id<CollectionChanges>)changes
+- (instancetype)initWithChanges:(id<BMACollectionChanges>)changes
              updateModelClosure:(void(^)())updateModelClosure;
 @end
-@implementation ModelChangesItem
-- (instancetype)initWithChanges:(id<CollectionChanges>)changes
+@implementation BMAModelChangesItem
+- (instancetype)initWithChanges:(id<BMACollectionChanges>)changes
              updateModelClosure:(void(^)())updateModelClosure;
 {
     self = [super init];
@@ -68,20 +70,7 @@ static double updatesAnimationDuration = 0.35;
 }
 @end
 
-@implementation BMADecoratedChatItemObject
-- (instancetype)initWithChatItem:(id<BMAChatItemProtocol>)chatItem
-                      attributes:(id<ChatItemDecorationAttributesProtocol>)attributes
-{
-    self = [super init];
-    if (self) {
-        _chatItem = chatItem;
-        _decorationAttributes = attributes;
-    }
-    return self;
-}
-@end
-
-typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
+typedef void(^UpdatesBlock)(id<BMACollectionChanges>, void(^)());
 
 @implementation BMAChatViewController (Changes)
 
@@ -149,7 +138,7 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     return MIN(MAX(0, midContentOffset / contentHeight), 1.0);
 }
 
-- (void)updateVisibleCells:(id<CollectionChanges>)changes {
+- (void)updateVisibleCells:(id<BMACollectionChanges>)changes {
     // Datasource should be already updated!
     
     NSMutableSet<NSIndexPath*> *visibleIndexPaths =
@@ -158,15 +147,15 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     }]];
     
     NSMutableSet<NSIndexPath*> *updatedIndexPaths = [NSMutableSet new];
-    for (id<CollectionChangeMove> move in [changes movedIndexPaths]) {
+    for (id<BMACollectionChangeMove> move in [changes movedIndexPaths]) {
         NSIndexPath *indexPathOld = [move indexPathOld];
         NSIndexPath *indexPathNew = [move indexPathNew];
 
         [updatedIndexPaths addObject:indexPathOld];
         UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPathOld];
         if (cell) {
-            id<ChatItemPresenterProtocol> presenter = [self presenterForIndexPath:indexPathNew];
-            id<ChatItemDecorationAttributesProtocol> decorationAttributes = [self decorationAttributesForIndexPath:indexPathNew];
+            id<BMAChatItemPresenterProtocol> presenter = [self presenterForIndexPath:indexPathNew];
+            id<BMAChatItemDecorationAttributesProtocol> decorationAttributes = [self decorationAttributesForIndexPath:indexPathNew];
             [presenter configureCell:cell decorationAttributes:decorationAttributes];
         }
     }
@@ -178,15 +167,15 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     for (NSIndexPath *indexPath in remaining) {
         UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
         if (cell) {
-            id<ChatItemPresenterProtocol> presenter = [self presenterForIndexPath:indexPath];
-            id<ChatItemDecorationAttributesProtocol> decorationAttributes = [self decorationAttributesForIndexPath:indexPath];
+            id<BMAChatItemPresenterProtocol> presenter = [self presenterForIndexPath:indexPath];
+            id<BMAChatItemDecorationAttributesProtocol> decorationAttributes = [self decorationAttributesForIndexPath:indexPath];
             [presenter configureCell:cell decorationAttributes:decorationAttributes];
         }
     }
 }
 
 - (void)performBatchUpdates:(void(^)())updateModelClosure
-                    changes:(id<CollectionChanges>)changes
+                    changes:(id<BMACollectionChanges>)changes
                     context:(BMAChatUpdateType)context completion:(void(^)())completion
 {
     BOOL shouldScrollToBottom = context != BMAChatUpdatePagination && self.isScrolledAtBottom;
@@ -215,7 +204,7 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
                 [self.collectionView deleteItemsAtIndexPaths:[[changes deletedIndexPaths] allObjects]];
                 [self.collectionView insertItemsAtIndexPaths:[[changes insertedIndexPaths] allObjects]];
 
-                for (id<CollectionChangeMove> move in [changes movedIndexPaths]) {
+                for (id<BMACollectionChangeMove> move in [changes movedIndexPaths]) {
                     [self.collectionView moveItemAtIndexPath:[move indexPathOld] toIndexPath:[move indexPathNew]];
                 }
             } completion:^(BOOL finished) {
@@ -249,7 +238,7 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
     self.autoLoadingEnabled = NO;
     
     __weak typeof(self) weakSelf = self;
-    UpdatesBlock perfomBatchUpdates = ^(id<CollectionChanges> changes, void(^updateModelClosure)()) {
+    UpdatesBlock perfomBatchUpdates = ^(id<BMACollectionChanges> changes, void(^updateModelClosure)()) {
         [weakSelf performBatchUpdates:updateModelClosure
                               changes:changes
                               context:context
@@ -259,29 +248,29 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
         }];
     };
     
-    id<ModelChanges> (^createModelUpdate)() = ^{
+    id<BMAModelChanges> (^createModelUpdate)() = ^{
         return [weakSelf createModelUpdates:newItems oldItems:oldItems collectionViewWidth:collectionViewWidth];
     };
 
     if (performInBackground) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            id<ModelChanges> modelUpdate = createModelUpdate();
+            id<BMAModelChanges> modelUpdate = createModelUpdate();
             dispatch_async(dispatch_get_main_queue(), ^{
                 perfomBatchUpdates(modelUpdate.changes, modelUpdate.updateModelClosure);
             });
         });
     } else {
-        id<ModelChanges> modelUpdate = createModelUpdate();
+        id<BMAModelChanges> modelUpdate = createModelUpdate();
         perfomBatchUpdates(modelUpdate.changes, modelUpdate.updateModelClosure);
     }
 }
 
-- (id<ModelChanges>)createModelUpdates:(NSArray<id<BMAChatItemProtocol>>*)newItems
+- (id<BMAModelChanges>)createModelUpdates:(NSArray<id<BMAChatItemProtocol>>*)newItems
                               oldItems:(NSArray<id<BMAChatItemProtocol>>*)oldItems
                    collectionViewWidth:(double)collectionViewWidth
 {
     
-    NSArray<id<BMADecoratedChatItem>> *newDecoratedItems;
+    NSArray<id<BMADecoratedChatItemProtocol>> *newDecoratedItems;
     if (self.chatItemsDecorator) {
         newDecoratedItems = [self.chatItemsDecorator decorateItems:newItems];
     } else {
@@ -290,8 +279,8 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
         }];
     }
     
-    id<CollectionChanges> changes =
-    [CollectionChanges generageChangesWithOldCollection:oldItems newCollection:newItems];
+    id<BMACollectionChanges> changes =
+    [BMACollectionChanges generageChangesWithOldCollection:oldItems newCollection:newItems];
     
     id layoutModel = [self createLayoutModel:newDecoratedItems collectionViewWidth:collectionViewWidth];
     
@@ -303,18 +292,18 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
         sSelf.decoratedChatItems = newDecoratedItems;
     };
     
-    return [[ModelChangesItem alloc] initWithChanges:changes updateModelClosure:updateModelClosure];
+    return [[BMAModelChangesItem alloc] initWithChanges:changes updateModelClosure:updateModelClosure];
 }
 
-- (BMAChatCollectionViewLayoutModel *)createLayoutModel:(NSArray<id<BMADecoratedChatItem>>*)decoratedItems collectionViewWidth:(double)collectionViewWidth {
+- (BMAChatCollectionViewLayoutModel *)createLayoutModel:(NSArray<id<BMADecoratedChatItemProtocol>>*)decoratedItems collectionViewWidth:(double)collectionViewWidth {
     BOOL isInbackground = ![NSThread isMainThread];
     NSMutableArray *itemsForMainThread = [NSMutableArray new];
     NSMutableArray *intermediateLayoutData = [NSMutableArray new];
     
     for (NSInteger index = 0; index < decoratedItems.count; index++) {
-        id<BMADecoratedChatItem> decoratedItem = decoratedItems[index];
-        id<ChatItemPresenterProtocol> presenter = [self presenterForIndex:index decoratedChatItems:decoratedItems];
-        id<ChatItemDecorationAttributesProtocol> decorationAttributes = [decoratedItem decorationAttributes];
+        id<BMADecoratedChatItemProtocol> decoratedItem = decoratedItems[index];
+        id<BMAChatItemPresenterProtocol> presenter = [self presenterForIndex:index decoratedChatItems:decoratedItems];
+        id<BMAChatItemDecorationAttributesProtocol> decorationAttributes = [decoratedItem decorationAttributes];
         double height = 0;
         double bottomMargin = [decorationAttributes bottomMargin];
         double topMargin = [decorationAttributes topMargin];
@@ -331,8 +320,8 @@ typedef void(^UpdatesBlock)(id<CollectionChanges>, void(^)());
         dispatch_sync(dispatch_get_main_queue(), ^{
             for (NSArray *tuple in itemsForMainThread) {
                 NSInteger index = [tuple[0] integerValue];
-                id<BMADecoratedChatItem> decoratedItem = tuple[1];
-                id<ChatItemPresenterProtocol> presenter = tuple[2];
+                id<BMADecoratedChatItemProtocol> decoratedItem = tuple[1];
+                id<BMAChatItemPresenterProtocol> presenter = tuple[2];
 
                 CGFloat height = [presenter heightForCell:collectionViewWidth decorationAttributes:decoratedItem.decorationAttributes];
                 [intermediateLayoutData[index] setHeight:height];

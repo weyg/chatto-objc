@@ -9,10 +9,15 @@
 #import "BMAChatViewController.h"
 
 #import "BMAChatUpdateType.h"
+
 #import "BMAChatItemProtocol.h"
+#import "BMADecoratedChatItemProtocol.h"
+
+#import "BMAChatItemPresenterProtocol.h"
+#import "BMAChatItemDecorationAttributesProtocol.h"
 
 @interface BMAChatViewController (Presenters)
-- (id<ChatItemPresenterProtocol>)presenterForIndex:(NSInteger)index decoratedChatItems:(NSArray<id<BMADecoratedChatItem>>*)decoratedChatItems;
-- (id<ChatItemPresenterProtocol>)presenterForIndexPath:(NSIndexPath*)indexPath;
-- (id<ChatItemDecorationAttributesProtocol>)decorationAttributesForIndexPath:(NSIndexPath*)indexPath;
+- (id<BMAChatItemPresenterProtocol>)presenterForIndex:(NSInteger)index decoratedChatItems:(NSArray<id<BMADecoratedChatItemProtocol>>*)decoratedChatItems;
+- (id<BMAChatItemPresenterProtocol>)presenterForIndexPath:(NSIndexPath*)indexPath;
+- (id<BMAChatItemDecorationAttributesProtocol>)decorationAttributesForIndexPath:(NSIndexPath*)indexPath;
 @end

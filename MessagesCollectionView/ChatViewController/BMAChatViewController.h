@@ -12,26 +12,29 @@
 #import "BMASerialQueue.h"
 
 #import "BMAChatItemProtocol.h"
+#import "BMADecoratedChatItemProtocol.h"
 
 #import "BMAChatCollectionViewLayout.h"
 #import "BMAChatCollectionViewLayoutModel.h"
 
+#import "BMAChatItemPresenterProtocol.h"
+
 @protocol ChatItemsDecoratorProtocol
--(NSArray<id<BMADecoratedChatItem>>*)decorateItems:(NSArray<id<BMAChatItemProtocol>>*)chatItems;
+-(NSArray<id<BMADecoratedChatItemProtocol>>*)decorateItems:(NSArray<id<BMAChatItemProtocol>>*)chatItems;
 @end
 
 @interface BMAChatViewController : UICollectionViewController
 
 @property (nonatomic, strong) id<BMAChatDataSourceProtocol> chatDataSource;
 @property (nonatomic, strong) id<BMASerialQueueProtocol> updateQueue;
-@property (nonatomic, strong) NSArray<id<BMADecoratedChatItem>> *decoratedChatItems;
+@property (nonatomic, strong) NSArray<id<BMADecoratedChatItemProtocol>> *decoratedChatItems;
 @property (nonatomic, strong) BMAChatCollectionViewLayoutModel *layoutModel;
 @property (nonatomic, assign) BOOL isFirstLayout;
 @property (nonatomic, assign) BOOL autoLoadingEnabled;
 
-@property (nonatomic, strong) NSArray<id<ChatItemPresenterProtocol>> *presenters;
-@property (nonatomic, strong) NSMapTable<id<BMAChatItemProtocol>,id<ChatItemPresenterProtocol>> *presentersByChatItem;
-@property (nonatomic, strong) NSMapTable<UICollectionViewCell*,id<ChatItemPresenterProtocol>> *presentersByCell;
+@property (nonatomic, strong) NSArray<id<BMAChatItemPresenterProtocol>> *presenters;
+@property (nonatomic, strong) NSMapTable<id<BMAChatItemProtocol>,id<BMAChatItemPresenterProtocol>> *presentersByChatItem;
+@property (nonatomic, strong) NSMapTable<UICollectionViewCell*,id<BMAChatItemPresenterProtocol>> *presentersByCell;
 
 /**
  - You can use a decorator to:

@@ -6,23 +6,6 @@
 //  Copyright © 2016 Aziz Latypov. All rights reserved.
 //
 
-//public protocol ChatDataSourceDelegateProtocol: class {
-//    func chatDataSourceDidUpdate(chatDataSource: ChatDataSourceProtocol)
-//    func chatDataSourceDidUpdate(chatDataSource: ChatDataSourceProtocol, context: ChatViewController.UpdateContext)
-//}
-//
-//public protocol ChatDataSourceProtocol: class {
-//    var hasMoreNext: Bool { get }
-//    var hasMorePrevious: Bool { get }
-//    var chatItems: [ChatItemProtocol] { get }
-//    weak var delegate: ChatDataSourceDelegateProtocol? { get set }
-//    
-//    func loadNext(completion: () -> Void)
-//    func loadPrevious(completion: () -> Void)
-//    func adjustNumberOfMessages(preferredMaxCount preferredMaxCount: Int?, focusPosition: Double, completion:(didAdjust: Bool) -> Void) // If you want, implement message count contention for performance, otherwise just call completion(false)
-//}
-//
-
 #import <Foundation/Foundation.h>
 
 #import "BMAChatUpdateType.h"

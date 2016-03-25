@@ -8,7 +8,7 @@
 
 #import "BMAChatViewController+Presenters.h"
 
-@interface BMAChatItemCellPresenterObject : NSObject <ChatItemPresenterProtocol>
+@interface BMAChatItemCellPresenterObject : NSObject <BMAChatItemPresenterProtocol>
 @end
 @implementation BMAChatItemCellPresenterObject
 
@@ -16,7 +16,7 @@
 }
 
 - (BOOL)canCalculateHeightInBackground { return YES; }
-- (CGFloat)heightForCell:(CGFloat)maximumWidth decorationAttributes:(id<ChatItemDecorationAttributesProtocol>)decorationAttributes {
+- (CGFloat)heightForCell:(CGFloat)maximumWidth decorationAttributes:(id<BMAChatItemDecorationAttributesProtocol>)decorationAttributes {
     return 50 + [decorationAttributes topMargin] + [decorationAttributes bottomMargin];
 }
 
@@ -24,7 +24,7 @@
     return [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
 }
 
-- (void)configureCell:(UICollectionViewCell*)cell decorationAttributes:(id<ChatItemDecorationAttributesProtocol>)decorationAttributes {
+- (void)configureCell:(UICollectionViewCell*)cell decorationAttributes:(id<BMAChatItemDecorationAttributesProtocol>)decorationAttributes {
     
 }
 
@@ -59,12 +59,12 @@
 //    return self.decoratedChatItems[indexPath.item].decorationAttributes
 //}
 
-- (id<ChatItemPresenterProtocol>)presenterForIndexPath:(NSIndexPath*)indexPath {
+- (id<BMAChatItemPresenterProtocol>)presenterForIndexPath:(NSIndexPath*)indexPath {
     return [self presenterForIndex:indexPath.row decoratedChatItems:self.decoratedChatItems];
 }
 
-- (id<ChatItemPresenterProtocol>)presenterForIndex:(NSInteger)index
-                                decoratedChatItems:(NSArray<id<BMADecoratedChatItem>>*)decoratedChatItems
+- (id<BMAChatItemPresenterProtocol>)presenterForIndex:(NSInteger)index
+                                decoratedChatItems:(NSArray<id<BMADecoratedChatItemProtocol>>*)decoratedChatItems
 {
     if (index < decoratedChatItems.count) {
         return [BMAChatItemCellPresenterObject new];
@@ -82,7 +82,7 @@
     return presenter;
 }
 
-- (id<ChatItemDecorationAttributesProtocol>)decorationAttributesForIndexPath:(NSIndexPath*)indexPath
+- (id<BMAChatItemDecorationAttributesProtocol>)decorationAttributesForIndexPath:(NSIndexPath*)indexPath
 {
     return [self.decoratedChatItems[indexPath.item] decorationAttributes];
 }

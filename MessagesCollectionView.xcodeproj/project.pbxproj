@@ -26,6 +26,7 @@
 		3E7735DC1CA53C9B00FF0644 /* BMAChatViewController+Presenters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735D61CA53C9B00FF0644 /* BMAChatViewController+Presenters.m */; };
 		3E7735DD1CA53C9B00FF0644 /* BMAChatViewController+Scrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735D81CA53C9B00FF0644 /* BMAChatViewController+Scrolling.m */; };
 		3E7735DE1CA53C9B00FF0644 /* BMAChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735DA1CA53C9B00FF0644 /* BMAChatViewController.m */; };
+		3E7735E51CA5490700FF0644 /* BMADecoratedChatItemObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7735E41CA5490700FF0644 /* BMADecoratedChatItemObject.m */; };
 		8F92B60B1CA45450001DAAC5 /* BMAFakeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F92B60A1CA45450001DAAC5 /* BMAFakeDataSource.m */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,12 @@
 		3E7735D81CA53C9B00FF0644 /* BMAChatViewController+Scrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BMAChatViewController+Scrolling.m"; sourceTree = "<group>"; };
 		3E7735D91CA53C9B00FF0644 /* BMAChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAChatViewController.h; sourceTree = "<group>"; };
 		3E7735DA1CA53C9B00FF0644 /* BMAChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAChatViewController.m; sourceTree = "<group>"; };
+		3E7735DF1CA5488600FF0644 /* BMAChatItemDecorationAttributesProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMAChatItemDecorationAttributesProtocol.h; sourceTree = "<group>"; };
+		3E7735E01CA5489200FF0644 /* BMADecoratedChatItemProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMADecoratedChatItemProtocol.h; sourceTree = "<group>"; };
+		3E7735E11CA5489C00FF0644 /* BMAChatItemPresenterProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMAChatItemPresenterProtocol.h; sourceTree = "<group>"; };
+		3E7735E21CA548A900FF0644 /* BMAChatItemPresenterBuilderProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMAChatItemPresenterBuilderProtocol.h; sourceTree = "<group>"; };
+		3E7735E31CA5490700FF0644 /* BMADecoratedChatItemObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMADecoratedChatItemObject.h; sourceTree = "<group>"; };
+		3E7735E41CA5490700FF0644 /* BMADecoratedChatItemObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMADecoratedChatItemObject.m; sourceTree = "<group>"; };
 		8F92B6091CA45450001DAAC5 /* BMAFakeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAFakeDataSource.h; sourceTree = "<group>"; };
 		8F92B60A1CA45450001DAAC5 /* BMAFakeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAFakeDataSource.m; sourceTree = "<group>"; };
 		B8743E43CE2E842D10D30576 /* Pods-MessagesCollectionViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesCollectionViewTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesCollectionViewTests/Pods-MessagesCollectionViewTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,7 +147,13 @@
 				3E2483241C9ACF0500C167EA /* Main.storyboard */,
 				3E7735A81CA2B06100FF0644 /* BMAUniqueIdentificable.h */,
 				3E7735A91CA2B08800FF0644 /* BMAChatItemProtocol.h */,
+				3E7735DF1CA5488600FF0644 /* BMAChatItemDecorationAttributesProtocol.h */,
+				3E7735E01CA5489200FF0644 /* BMADecoratedChatItemProtocol.h */,
+				3E7735E11CA5489C00FF0644 /* BMAChatItemPresenterProtocol.h */,
+				3E7735E21CA548A900FF0644 /* BMAChatItemPresenterBuilderProtocol.h */,
 				3E7735A71CA2AE9C00FF0644 /* BMAChatDataSourceProtocol.h */,
+				3E7735E31CA5490700FF0644 /* BMADecoratedChatItemObject.h */,
+				3E7735E41CA5490700FF0644 /* BMADecoratedChatItemObject.m */,
 				8F92B6091CA45450001DAAC5 /* BMAFakeDataSource.h */,
 				8F92B60A1CA45450001DAAC5 /* BMAFakeDataSource.m */,
 				3E2483271C9ACF0500C167EA /* Assets.xcassets */,
@@ -422,6 +435,7 @@
 				3E7735BC1CA53B7800FF0644 /* NSSet+BlockKit.m in Sources */,
 				3E7735CC1CA53C2500FF0644 /* BMAChatCollectionViewLayoutModel.m in Sources */,
 				3E7735C01CA53BA600FF0644 /* BMASerialQueue.m in Sources */,
+				3E7735E51CA5490700FF0644 /* BMADecoratedChatItemObject.m in Sources */,
 				3E7735DE1CA53C9B00FF0644 /* BMAChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
